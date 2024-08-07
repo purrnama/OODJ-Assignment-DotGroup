@@ -11,6 +11,10 @@ package com.mycompany.oodj.assignment.dotgroup;
 public class OODJAssignmentDotGroup {
 
     public static void main(String[] args) {
+        Schedule schedule = Schedule.getInstance();
+        Halls halls = Halls.getInstance();
+        Users users = Users.getInstance();
+        Issues issues = Issues.getInstance();
         System.out.println("Hello World!");
     }
 }
