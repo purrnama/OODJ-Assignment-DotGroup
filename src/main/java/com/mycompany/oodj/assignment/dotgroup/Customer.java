@@ -12,4 +12,14 @@ public class Customer extends User {
     public Customer(String username, String password){
         super(username, password, RoleType.CUSTOMER);
     }
+    
+    public Issue getIssue() {
+    	return issue;
+    }
+    
+    public void setIssue(Issue issue) {
+    	this.issue = issue;
+    }
+     
+    private Issue issue;
 }

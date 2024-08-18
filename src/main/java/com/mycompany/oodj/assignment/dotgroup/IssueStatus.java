@@ -10,5 +10,7 @@ package com.mycompany.oodj.assignment.dotgroup;
  */
 public enum IssueStatus {
     OPEN,
-    CLOSED
+    CLOSED,
+    REOPENED,
+    RESOLVED
 }

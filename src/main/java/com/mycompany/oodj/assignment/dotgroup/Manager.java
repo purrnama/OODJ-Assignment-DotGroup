@@ -1,15 +1,57 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.oodj.assignment.dotgroup;
 
-/**
- *
- * @author purrnama
- */
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Manager extends User {
     public Manager(String username, String password){
-        super(username, password, RoleType.SCHEDULER);
+        super(username, password, RoleType.MANAGER);
     }
+    
+    public void viewSales() {
+//    	String[] salesTotal = 
+    	
+    	
+    }
+    
+    public void maintenance() {
+    	
+    }
+    
+    public void receiveCustomerIssue() {
+    	
+    }
+    
+    public void notifyScheduler(String message, NotificationLevel notificationLevel, NotificationType notificationType) {
+    	
+    	
+    	scheduler.getUsername();
+    }
+    
+    public void viewCustomerIssues() {
+    	String issue = "";
+    	customer.getIssue();
+    	
+    }
+    
+    public void setCustomerIssue(IssueStatusCustomer issueStatusCustomer) {
+    	switch (issueStatusCustomer) {
+    		case IN_PROGRESS:
+    			
+    			break;
+			case CLOSED:
+				break;
+			case CANCELLED:
+				break;
+			case DONE:
+				break;
+			default:
+				break;
+    	}
+    }
+    
+    private HashMap<Customer, Sales> sales;
+    private ArrayList<Customer> customerIssue;
+    private Customer customer;
+    private Scheduler scheduler;
 }
