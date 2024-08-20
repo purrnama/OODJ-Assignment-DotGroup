@@ -7,7 +7,6 @@ package com.mycompany.oodj.assignment.dotgroup;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
-import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
