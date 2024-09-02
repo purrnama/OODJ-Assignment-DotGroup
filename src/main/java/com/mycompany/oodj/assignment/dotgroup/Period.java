@@ -4,6 +4,7 @@
  */
 package com.mycompany.oodj.assignment.dotgroup;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 /**
  *
  * @author purrnama
@@ -18,11 +19,12 @@ public class Period {
     private Scheduler scheduledBy;
     private PeriodStatus status;
     
+    
     public Period(){
         
     }
 
-    public Period(LocalDateTime startTime, LocalDateTime endTime, Hall hall, PeriodType type, String title, Customer bookedBy, Scheduler scheduledBy, PeriodStatus status) {
+    public Period(LocalDateTime startTime, LocalDateTime endTime, Hall hall, PeriodType type, String title, PeriodStatus status, Customer bookedBy, Scheduler scheduledBy) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.hall = hall;
@@ -35,20 +37,38 @@ public class Period {
 
     @Override
     public String toString() {
-        return startTime + "," + endTime + "," + hall + "," + type + "," + title + "," + bookedBy + "," + scheduledBy + "," + status;
+        String strBookedBy = "null";
+        if(bookedBy != null){
+            strBookedBy = bookedBy.getUsername();
+        }
+        String strScheduledBy = "null";
+        if(scheduledBy != null){
+            strScheduledBy = scheduledBy.getUsername();
+        }
+        return startTime + "," + endTime + "," + hall + "," + type + "," + title + "," + status + "," + strBookedBy + "," + strScheduledBy;
     }
     
     public static Period parse(String line){
+        FileOperation file = FileOperation.getInstance();
         String[] col = line.split(",");
         LocalDateTime startTime = LocalDateTime.parse(col[0]);
         LocalDateTime endTime = LocalDateTime.parse(col[1]);
         Hall hall = Hall.parse(col[2] + "," + col[3] + "," + col[4]);
         PeriodType type = PeriodType.valueOf(col[5]);
         String title = col[6];
-        Customer bookedBy = new Customer(col[7], col[8]);
-        Scheduler scheduledBy = new Scheduler(col[10], col[11]);
-        PeriodStatus status = PeriodStatus.valueOf(col[13]);
-        Period p = new Period(startTime, endTime, hall, type, title, bookedBy, scheduledBy, status);
+        PeriodStatus status = PeriodStatus.valueOf(col[7]);
+        Customer bookedBy = null;
+        Scheduler scheduledBy = null;
+        ArrayList<User> users = file.read(FileType.USERS);
+        for(User u : users){
+            if(u.getUsername() == col[8]){
+                bookedBy = new Customer(u.getUsername(), u.getPassword());
+            }
+            if(u.getUsername() == col[9]){
+                scheduledBy = new Scheduler(u.getUsername(), u.getPassword());
+            }
+        }
+        Period p = new Period(startTime, endTime, hall, type, title, status, bookedBy, scheduledBy);
         return p;
     }
 
