@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.oodj.assignment.dotgroup;
-
+import java.time.Instant;
 /**
  *
  * @author purrnama
@@ -37,8 +37,7 @@ public class User {
         User u = new User(name, password, RoleType.valueOf(col[2]));
         return u;
     }
-    
-    
+
 
     public String getUsername() {
         return username;
@@ -51,7 +50,6 @@ public class User {
     public RoleType getRole() {
         return role;
     }
-
     public void setUsername(String username) {
         this.username = username;
     }
