@@ -10,6 +10,22 @@ package com.mycompany.oodj.assignment.dotgroup;
  */
 public class Customer extends User {
     public Customer(String username, String password){
-        super(username, password, RoleType.CUSTOMER);
+        super(username, password);
+    }
+    
+    public static Customer parse(String line){
+        String[] col = line.split(",");
+        String name = col[0];
+        String password = col[1];
+        Customer c = new Customer(name, password);
+        return c;
+    }
+    
+    public String toString(){
+        return this.getUsername() + "," + this.getPassword() + "," + RoleType.CUSTOMER;
+    }
+    
+    public void openPanel(){
+    
     }
 }

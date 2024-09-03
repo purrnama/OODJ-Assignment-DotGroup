@@ -10,6 +10,22 @@ package com.mycompany.oodj.assignment.dotgroup;
  */
 public class Administrator extends User {
     public Administrator(String username, String password){
-        super(username, password, RoleType.ADMINISTRATOR);
+        super(username, password);
+    }
+    
+    public static Administrator parse(String line){
+        String[] col = line.split(",");
+        String name = col[0];
+        String password = col[1];
+        Administrator a = new Administrator(name, password);
+        return a;
+    }
+    
+    public String toString(){
+        return this.getUsername() + "," + this.getPassword() + "," + RoleType.ADMINISTRATOR;
+    }
+    
+    public void openPanel(){
+    
     }
 }

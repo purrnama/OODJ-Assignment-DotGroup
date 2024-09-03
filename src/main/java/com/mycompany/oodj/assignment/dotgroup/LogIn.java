@@ -128,29 +128,7 @@ public class LogIn extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
-        String username = txtBoxUsername.getText();
-        String password = String.valueOf(txtBoxPassword.getPassword());
-        FileOperation file = FileOperation.getInstance();
-        ArrayList<User> users = file.read(FileType.USERS);
-        for(User u : users){
-            if(u.getUsername().equals(username) && u.getPassword().equals(password)){
-                RoleType role = u.getRole();
-                if(role == RoleType.ADMINISTRATOR){
-                    
-                }
-                if(role == RoleType.CUSTOMER){
-                    
-                }
-                if(role == RoleType.MANAGER){
-                    
-                }
-                if(role == RoleType.SCHEDULER){
-                    
-                }
-                return;
-            }
-        }
-        JOptionPane.showMessageDialog(null, "Invalid username or password.");
+       
     }//GEN-LAST:event_btnLogInActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed

@@ -9,9 +9,8 @@ package com.mycompany.oodj.assignment.dotgroup;
  * @author purrnama
  */
 public enum RoleType {
-    SCHEDULER,
-    CUSTOMER,
-    ADMINISTRATOR,
     MANAGER,
-    UNASSIGNED
+    CUSTOMER,
+    SCHEDULER,
+    ADMINISTRATOR
 }

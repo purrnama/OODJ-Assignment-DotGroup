@@ -162,10 +162,31 @@ public class FileOperation {
         }
         if(type == FileType.USERS){
             ArrayList<String> data = readFile(usersFile);
-            ArrayList<User> userData = new ArrayList();
+            ArrayList userData = new ArrayList();
             for (String line : data){
-                User u = User.parse(line);
-                userData.add(u);
+                String[] col = line.split(",");
+                switch (RoleType.valueOf(col[2])){
+                    case MANAGER: {
+                        Manager m = Manager.parse(line);
+                        userData.add(m);
+                        continue;
+                    }
+                    case CUSTOMER: {
+                        Customer c = Customer.parse(line);
+                        userData.add(c);
+                        continue;
+                    }
+                    case SCHEDULER: {
+                        Scheduler s = Scheduler.parse(line);
+                        userData.add(s);
+                        continue;
+                    }
+                    case ADMINISTRATOR: {
+                        Administrator a = Administrator.parse(line);
+                        userData.add(a);
+                        continue;
+                    }
+                }
             }
             return userData;
         }
