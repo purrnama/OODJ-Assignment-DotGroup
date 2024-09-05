@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.oodj.assignment.dotgroup;
-
+import javax.swing.JFrame;
 /**
  *
  * @author purrnama
@@ -25,7 +25,8 @@ public class Customer extends User {
         return this.getUsername() + "," + this.getPassword() + "," + RoleType.CUSTOMER;
     }
     
-    public void openPanel(){
-    
+    public JFrame openPanel(JFrame login){
+        //replace this with your implementation
+        return new JFrame();
     }
 }

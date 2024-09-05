@@ -4,6 +4,7 @@
  */
 package com.mycompany.oodj.assignment.dotgroup;
 import java.time.Instant;
+import javax.swing.JFrame;
 /**
  *
  * @author purrnama
@@ -35,6 +36,6 @@ public abstract class User {
         this.password = password;
     }
     
-    public abstract void openPanel();
+    public abstract JFrame openPanel(JFrame login);
     
 }

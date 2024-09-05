@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -135,15 +136,49 @@ public class FileOperation {
         System.out.println("Edited " + filesEdited + " from " + f.getName());
     }
     
+    private void warning(String message, String title){
+        JOptionPane.showMessageDialog(null, message, title, JOptionPane.WARNING_MESSAGE);
+    }
+    
+    private boolean isPeriodClashing(Period p1){
+        ArrayList<Period> periods = read(FileType.SCHEDULE);
+        for(Period p2 : periods){
+            System.out.println(p1);
+            System.out.println(p2);
+            System.out.println(p1.getStartTime().isBefore(p2.getEndTime()));
+            System.out.println(p2.getStartTime().isBefore(p1.getEndTime()));
+            if(p1.getStartTime().isBefore(p2.getEndTime()) && p2.getStartTime().isBefore(p1.getEndTime())){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private boolean isUserExists(User u1){
+        ArrayList<User> users = read(FileType.USERS);
+        for(User u2 : users){
+            if(u2.getUsername().equals(u1.getUsername())){
+                return true;
+            }
+        }
+        return false;
+    }
     
     // create method overloads for each class
     public void create(Hall h){
         write(hallsFile, h.toString());
     }
     public void create(User u){
+        if(isUserExists(u)){
+            warning("User with username " + u.getUsername() + " already exists. Please use a different username." , "Invalid User");
+        }
         write(usersFile, u.toString());
     }
     public void create(Period p){
+        if(isPeriodClashing(p)){
+            warning("New period is clashing with an existing period.", "Invalid Period");
+            return;
+        }
         write(scheduleFile, p.toString());
     }
     public void create(Issue i){
