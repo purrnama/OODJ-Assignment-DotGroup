@@ -107,7 +107,7 @@ public class FileOperation {
     // generic method for removing a matching line in file, used internally
     private void removeLine(File f, String s){
         
-        ArrayList<String> currentList = readFile(hallsFile);
+        ArrayList<String> currentList = readFile(f);
         ArrayList<String> newList = new ArrayList();
         int filesRemoved = 0;
         for (String line : currentList){
@@ -121,7 +121,7 @@ public class FileOperation {
         System.out.println("Removed " + filesRemoved + " file(s) from " + f.getName());
     }
     private void editLine(File f, String old_s, String new_s){
-        ArrayList<String> currentList = readFile(hallsFile);
+        ArrayList<String> currentList = readFile(f);
         ArrayList<String> newList = new ArrayList();
         int filesEdited = 0;
         for (String line : currentList){
