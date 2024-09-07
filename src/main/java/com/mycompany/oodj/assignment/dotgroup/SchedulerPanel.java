@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 /**
  *
  * @author purrnama
@@ -54,8 +55,13 @@ public class SchedulerPanel extends javax.swing.JFrame {
                 selectedPeriod = getSelectedPeriod();
                 if(selectedPeriod != null){
                     txtBoxPeriodTitle.setText(selectedPeriod.getTitle());
-                    //spinnerHourlyRate.setValue(selectedHall.getHourlyRate());
-                    //spinnerTotalSeats.setValue(selectedHall.getTotalSeats());
+                    cBoxPeriodHall.setSelectedItem(selectedPeriod.getHall().getName());
+                    datePickerPeriodDate.setDate(Date.from(selectedPeriod.getStartTime().toInstant(ZoneOffset.UTC)));
+                    cBoxPeriodType.setSelectedItem(selectedPeriod.getType().toString());
+                    spinnerPeriodStartHour.setValue(selectedPeriod.getStartTime().getHour());
+                    spinnerPeriodStartMinute.setValue(selectedPeriod.getStartTime().getMinute());
+                    spinnerPeriodEndHour.setValue(selectedPeriod.getEndTime().getHour());
+                    spinnerPeriodEndMinute.setValue(selectedPeriod.getEndTime().getMinute());
                 }
             }
         });
@@ -385,7 +391,7 @@ public class SchedulerPanel extends javax.swing.JFrame {
         lblDate.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         lblDate.setText("Date");
 
-        spinnerPeriodStartHour.setModel(new javax.swing.SpinnerNumberModel(0, 0, 12, 1));
+        spinnerPeriodStartHour.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
 
         spinnerPeriodStartMinute.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
 
@@ -397,7 +403,7 @@ public class SchedulerPanel extends javax.swing.JFrame {
 
         spinnerPeriodEndMinute.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
 
-        spinnerPeriodEndHour.setModel(new javax.swing.SpinnerNumberModel(0, 0, 12, 1));
+        spinnerPeriodEndHour.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
 
         lblDate3.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         lblDate3.setText("Date:");
@@ -432,7 +438,13 @@ public class SchedulerPanel extends javax.swing.JFrame {
         lblDate6.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         lblDate6.setText("Hall:");
 
-        cBoxPeriodType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Booking", "Maintenance" }));
+        cBoxPeriodHall.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cBoxPeriodHallActionPerformed(evt);
+            }
+        });
+
+        cBoxPeriodType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BOOKING", "MAINTENANCE" }));
 
         javax.swing.GroupLayout panelScheduleLayout = new javax.swing.GroupLayout(panelSchedule);
         panelSchedule.setLayout(panelScheduleLayout);
@@ -615,6 +627,7 @@ public class SchedulerPanel extends javax.swing.JFrame {
         LocalDate date = convertToLocalDate(calSchedule.getDate());
         lblDate.setText(date.format(DateTimeFormatter.ISO_LOCAL_DATE));
         updatePeriodsTable(getPeriodsByLocalDate(date));
+        selectedPeriod = null;
     }//GEN-LAST:event_calSchedulePropertyChange
 
     private void btnCreatePeriodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreatePeriodActionPerformed
@@ -629,12 +642,29 @@ public class SchedulerPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCreatePeriodActionPerformed
 
     private void btnEditPeriodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditPeriodActionPerformed
-        // TODO add your handling code here:
+        Period p = getInputPeriod();
+        if(p != null && selectedPeriod != null){
+            file.update(selectedPeriod, p);
+            LocalDate date = convertToLocalDate(calSchedule.getDate());
+            lblDate.setText(date.format(DateTimeFormatter.ISO_LOCAL_DATE));
+            updatePeriodsTable(getPeriodsByLocalDate(date));
+        }
+        
     }//GEN-LAST:event_btnEditPeriodActionPerformed
 
     private void btnDeletePeriodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletePeriodActionPerformed
-        // TODO add your handling code here:
+        Period p = getSelectedPeriod();
+        if(p != null){
+            file.delete(p);
+            LocalDate date = convertToLocalDate(calSchedule.getDate());
+            lblDate.setText(date.format(DateTimeFormatter.ISO_LOCAL_DATE));
+            updatePeriodsTable(getPeriodsByLocalDate(date));
+        }
     }//GEN-LAST:event_btnDeletePeriodActionPerformed
+
+    private void cBoxPeriodHallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBoxPeriodHallActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cBoxPeriodHallActionPerformed
 
     /**
      * @param args the command line arguments
