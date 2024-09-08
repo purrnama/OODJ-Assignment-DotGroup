@@ -219,6 +219,8 @@ public class SchedulerPanel extends javax.swing.JFrame {
         };
         spinnerHourlyRate = new javax.swing.JSpinner();
         spinnerTotalSeats = new javax.swing.JSpinner();
+        txtBoxHallSearch = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
         panelSchedule = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         calSchedule = new com.toedter.calendar.JCalendar();
@@ -306,36 +308,52 @@ public class SchedulerPanel extends javax.swing.JFrame {
 
         spinnerTotalSeats.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
+        txtBoxHallSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBoxHallSearchActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel7.setText("Search:");
+
         javax.swing.GroupLayout panelHallLayout = new javax.swing.GroupLayout(panelHall);
         panelHall.setLayout(panelHallLayout);
         panelHallLayout.setHorizontalGroup(
             panelHallLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHallLayout.createSequentialGroup()
+            .addGroup(panelHallLayout.createSequentialGroup()
                 .addGroup(panelHallLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelHallLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(panelHallLayout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(spinnerHourlyRate, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panelHallLayout.createSequentialGroup()
-                            .addGroup(panelHallLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtBoxName, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelHallLayout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHallLayout.createSequentialGroup()
                         .addGroup(panelHallLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnDeleteHall)
+                            .addGroup(panelHallLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(panelHallLayout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(spinnerHourlyRate, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(panelHallLayout.createSequentialGroup()
+                                    .addGroup(panelHallLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel3))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtBoxName, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(panelHallLayout.createSequentialGroup()
-                                .addComponent(btnCreateHall)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEditHall))
-                            .addComponent(spinnerTotalSeats, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
+                                .addGap(43, 43, 43)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(panelHallLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnDeleteHall)
+                                    .addGroup(panelHallLayout.createSequentialGroup()
+                                        .addComponent(btnCreateHall)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnEditHall))
+                                    .addComponent(spinnerTotalSeats, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelHallLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBoxHallSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panelHallLayout.setVerticalGroup(
@@ -343,7 +361,11 @@ public class SchedulerPanel extends javax.swing.JFrame {
             .addGroup(panelHallLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addGap(41, 41, 41)
+                .addGap(1, 1, 1)
+                .addGroup(panelHallLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBoxHallSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelHallLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelHallLayout.createSequentialGroup()
@@ -666,6 +688,21 @@ public class SchedulerPanel extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cBoxPeriodHallActionPerformed
 
+    private void txtBoxHallSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBoxHallSearchActionPerformed
+        if(txtBoxHallSearch.getText().isEmpty()){
+            updateHallsTable(loadHalls());
+            return;
+        }
+        ArrayList<Hall> halls = file.read(FileType.HALLS);
+        ArrayList<Hall> filtered = new ArrayList();
+        for( Hall h : halls ){
+            if(h.getName().contains(txtBoxHallSearch.getText())){
+                filtered.add(h);
+            }
+        }
+        updateHallsTable(filtered);
+    }//GEN-LAST:event_txtBoxHallSearchActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -718,6 +755,7 @@ public class SchedulerPanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
@@ -740,6 +778,7 @@ public class SchedulerPanel extends javax.swing.JFrame {
     private javax.swing.JSpinner spinnerTotalSeats;
     private javax.swing.JTable tblHalls;
     private javax.swing.JTable tblPeriods;
+    private javax.swing.JTextField txtBoxHallSearch;
     private javax.swing.JTextField txtBoxName;
     private javax.swing.JTextField txtBoxPeriodTitle;
     // End of variables declaration//GEN-END:variables
