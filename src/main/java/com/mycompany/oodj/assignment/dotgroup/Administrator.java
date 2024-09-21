@@ -3,13 +3,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.oodj.assignment.dotgroup;
-
+import javax.swing.JFrame;
 /**
  *
  * @author purrnama
  */
 public class Administrator extends User {
     public Administrator(String username, String password){
-        super(username, password, RoleType.ADMINISTRATOR);
+        super(username, password);
+    }
+    
+    public static Administrator parse(String line){
+        String[] col = line.split(",");
+        String name = col[0];
+        String password = col[1];
+        Administrator a = new Administrator(name, password);
+        return a;
+    }
+    
+    public String toString(){
+        return this.getUsername() + "," + this.getPassword() + "," + RoleType.ADMINISTRATOR;
+    }
+    
+    public JFrame openPanel(JFrame login){
+        //replace this with your implementation
+        return new JFrame();
     }
 }

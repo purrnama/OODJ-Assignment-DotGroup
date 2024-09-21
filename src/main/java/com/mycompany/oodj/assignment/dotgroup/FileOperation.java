@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -106,7 +107,7 @@ public class FileOperation {
     // generic method for removing a matching line in file, used internally
     private void removeLine(File f, String s){
         
-        ArrayList<String> currentList = readFile(hallsFile);
+        ArrayList<String> currentList = readFile(f);
         ArrayList<String> newList = new ArrayList();
         int filesRemoved = 0;
         for (String line : currentList){
@@ -120,7 +121,7 @@ public class FileOperation {
         System.out.println("Removed " + filesRemoved + " file(s) from " + f.getName());
     }
     private void editLine(File f, String old_s, String new_s){
-        ArrayList<String> currentList = readFile(hallsFile);
+        ArrayList<String> currentList = readFile(f);
         ArrayList<String> newList = new ArrayList();
         int filesEdited = 0;
         for (String line : currentList){
@@ -135,15 +136,49 @@ public class FileOperation {
         System.out.println("Edited " + filesEdited + " from " + f.getName());
     }
     
+    private void warning(String message, String title){
+        JOptionPane.showMessageDialog(null, message, title, JOptionPane.WARNING_MESSAGE);
+    }
+    
+    private boolean isPeriodClashing(Period p1){
+        ArrayList<Period> periods = read(FileType.SCHEDULE);
+        for(Period p2 : periods){
+            System.out.println(p1);
+            System.out.println(p2);
+            System.out.println(p1.getStartTime().isBefore(p2.getEndTime()));
+            System.out.println(p2.getStartTime().isBefore(p1.getEndTime()));
+            if(p1.getStartTime().isBefore(p2.getEndTime()) && p2.getStartTime().isBefore(p1.getEndTime())){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private boolean isUserExists(User u1){
+        ArrayList<User> users = read(FileType.USERS);
+        for(User u2 : users){
+            if(u2.getUsername().equals(u1.getUsername())){
+                return true;
+            }
+        }
+        return false;
+    }
     
     // create method overloads for each class
     public void create(Hall h){
         write(hallsFile, h.toString());
     }
     public void create(User u){
+        if(isUserExists(u)){
+            warning("User with username " + u.getUsername() + " already exists. Please use a different username." , "Invalid User");
+        }
         write(usersFile, u.toString());
     }
     public void create(Period p){
+        if(isPeriodClashing(p)){
+            warning("New period is clashing with an existing period.", "Invalid Period");
+            return;
+        }
         write(scheduleFile, p.toString());
     }
     public void create(Issue i){
@@ -162,10 +197,31 @@ public class FileOperation {
         }
         if(type == FileType.USERS){
             ArrayList<String> data = readFile(usersFile);
-            ArrayList<User> userData = new ArrayList();
+            ArrayList userData = new ArrayList();
             for (String line : data){
-                User u = User.parse(line);
-                userData.add(u);
+                String[] col = line.split(",");
+                switch (RoleType.valueOf(col[2])){
+                    case MANAGER: {
+                        Manager m = Manager.parse(line);
+                        userData.add(m);
+                        continue;
+                    }
+                    case CUSTOMER: {
+                        Customer c = Customer.parse(line);
+                        userData.add(c);
+                        continue;
+                    }
+                    case SCHEDULER: {
+                        Scheduler s = Scheduler.parse(line);
+                        userData.add(s);
+                        continue;
+                    }
+                    case ADMINISTRATOR: {
+                        Administrator a = Administrator.parse(line);
+                        userData.add(a);
+                        continue;
+                    }
+                }
             }
             return userData;
         }
