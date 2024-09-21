@@ -12,7 +12,7 @@ public class Manager extends User {
 //
 //    public Manager(String username, String password){
 //        super(username, password);
-//    }
+    }
     
     public static Manager parse(String line){
         String[] col = line.split(",");

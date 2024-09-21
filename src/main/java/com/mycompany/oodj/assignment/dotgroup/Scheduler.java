@@ -30,14 +30,13 @@ public class Scheduler extends User {
     }
     
     public JFrame openPanel(JFrame login){
-//        SchedulerPanel panel = new SchedulerPanel();
-//        panel.setVisible(true);
-//        panel.addWindowListener(new WindowAdapter(){
-//            public void windowClosing(WindowEvent e){
-//                login.setVisible(true);
-//            }
-//        });
-//        return panel;
-        return 0;
+        SchedulerPanel panel = new SchedulerPanel();
+        panel.setVisible(true);
+        panel.addWindowListener(new WindowAdapter(){
+            public void windowClosing(WindowEvent e){
+                login.setVisible(true);
+            }
+        });
+        return panel;
     }
 }
