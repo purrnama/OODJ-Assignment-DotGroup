@@ -1,2 +1,2 @@
-Auditorium,200.00,500
-Theater,150.00,300
+Theater,150.0,300
+Auditorium,30.0,300

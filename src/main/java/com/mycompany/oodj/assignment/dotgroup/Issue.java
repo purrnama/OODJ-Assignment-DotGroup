@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.oodj.assignment.dotgroup;
 
-/**
- *
- * @author purrnama
- */
 public class Issue {
     private String subject;
     private String body;
@@ -25,27 +17,42 @@ public class Issue {
         this.setStatus(IssueStatus.OPEN);
     }
 
-	public String getSubject() {
-		return subject;
-	}
+    @Override
+    public String toString() {
+        return subject + "," + body + "," + status;
+    }
+    
+    public static Issue parse(String line){
+        String[] col = line.split(",");
+        String subject = col[0];
+        String body = col[1];
+        String status = col[2];
+        Issue i = new Issue(subject, body, IssueStatus.valueOf(status));
+        return i;
+    }
+    
 
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
+    public String getSubject() {
+        return subject;
+    }
 
-	public String getBody() {
-		return body;
-	}
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
 
-	public void setBody(String body) {
-		this.body = body;
-	}
+    public String getBody() {
+        return body;
+    }
 
-	public IssueStatus getStatus() {
-		return status;
-	}
+    public void setBody(String body) {
+        this.body = body;
+    }
 
-	public void setStatus(IssueStatus status) {
-		this.status = status;
-	}
+    public IssueStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(IssueStatus status) {
+        this.status = status;
+    }    
 }

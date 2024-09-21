@@ -5,4 +5,5 @@ public enum IssueStatusCustomer {
 	DONE,
 	CLOSED, 
 	CANCELLED,
+	COMPLETED,
 }

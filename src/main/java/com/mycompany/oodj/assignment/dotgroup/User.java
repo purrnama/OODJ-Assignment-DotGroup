@@ -25,6 +25,21 @@ public class User {
         this.role = role;
     }
 
+    @Override
+    public String toString() {
+        return username + "," + password + "," + role;
+    }
+    
+    public static User parse(String line){
+        String[] col = line.split(",");
+        String name = col[0];
+        String password = col[1];
+        User u = new User(name, password, RoleType.valueOf(col[2]));
+        return u;
+    }
+    
+    
+
     public String getUsername() {
         return username;
     }
