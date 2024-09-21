@@ -1,13 +1,11 @@
 package com.mycompany.oodj.assignment.dotgroup;
 
-import java.swing.table.DefaultTableMoodle;
+import javax.swing.table.DefaultTableModel;
 
 public class SalesDatabase extends javax.swing.JFrame {
 
     public SalesDatabase() {
         initComponents();
-        
-        
     }
 
     /**
