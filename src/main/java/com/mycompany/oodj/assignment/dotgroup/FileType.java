@@ -12,5 +12,6 @@ public enum FileType {
     HALLS,
     USERS,
     SCHEDULE,
-    ISSUES
+    ISSUES,
+    SALES
 }
