@@ -158,8 +158,8 @@ public class ManagerPanel extends javax.swing.JFrame {
     private void button_MaintenanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_MaintenanceActionPerformed
         // TODO add your handling code here:
         closePanel();
-//        SalesDashboard panel = new SalesDashboard();
-//        panel.setVisible(true);
+        ManagerMaintenance panel = new ManagerMaintenance();
+        panel.setVisible(true);
     }//GEN-LAST:event_button_MaintenanceActionPerformed
 
     private void button_MaintenanceMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button_MaintenanceMouseEntered
@@ -185,7 +185,8 @@ public class ManagerPanel extends javax.swing.JFrame {
     private void button_SalesDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_SalesDashboardActionPerformed
         // TODO add your handling code here:
         closePanel();
-        SalesDashboard panel = new SalesDashboard();
+//        SalesDashboard panel = new SalesDashboard();
+        ManagerSalesDatabase panel = new ManagerSalesDatabase();
         panel.setVisible(true);
     }//GEN-LAST:event_button_SalesDashboardActionPerformed
 

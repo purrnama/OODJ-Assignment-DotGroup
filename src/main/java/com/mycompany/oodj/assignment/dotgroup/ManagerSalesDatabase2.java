@@ -2,12 +2,44 @@ package com.mycompany.oodj.assignment.dotgroup;
 
 import javax.swing.table.DefaultTableModel;
 
-public class SalesDatabase extends javax.swing.JFrame {
+import java.util.ArrayList;
 
-    public SalesDatabase() {
+public class ManagerSalesDatabase2 extends javax.swing.JFrame {
+    
+    FileOperation file = FileOperation.getInstance();
+
+    public ManagerSalesDatabase2() {
         initComponents();
+        
+        updateSalesTable(loadSales());
     }
-
+    
+    private ArrayList<ManagerSales> loadSales() {
+        return file.readSales();
+//        return file.readSales(FileType.SALES);
+    }
+    
+    private void updateSalesTable(ArrayList<ManagerSales> sales) {
+        DefaultTableModel model = (DefaultTableModel)table_SalesDatabase.getModel();
+        model.setRowCount(0);
+        
+        for (ManagerSales sale : sales) {
+            model.addRow(
+                new Object[]{
+                    sale.getSalesId(),
+                    sale.getCustomerId(),
+                    sale.getCustomerName(),
+                    sale.getStartTime(),
+                    sale.getEndTime(),
+                    sale.getDuration(),
+                    sale.getHallType(),
+                    sale.getReason(),
+                    sale.getTotalSales()
+                }
+            );
+        }
+    }
+            
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -18,9 +50,9 @@ public class SalesDatabase extends javax.swing.JFrame {
     private void initComponents() {
 
         body_PanelMain = new javax.swing.JPanel();
-        label_SalesDashboardTitle = new javax.swing.JLabel();
+        label_SalesTableTitle = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        table_SalesDashboard = new javax.swing.JTable();
+        table_SalesDatabase = new javax.swing.JTable();
         aside_PanelFilter = new javax.swing.JPanel();
         label_HallType = new javax.swing.JLabel();
         radio_HallAuditorium = new javax.swing.JRadioButton();
@@ -33,12 +65,12 @@ public class SalesDatabase extends javax.swing.JFrame {
 
         body_PanelMain.setBackground(new java.awt.Color(0, 0, 51));
 
-        label_SalesDashboardTitle.setBackground(new java.awt.Color(204, 255, 255));
-        label_SalesDashboardTitle.setFont(new java.awt.Font("MesloLGM Nerd Font", 1, 24)); // NOI18N
-        label_SalesDashboardTitle.setForeground(new java.awt.Color(255, 255, 255));
-        label_SalesDashboardTitle.setText("Sales Dashboard");
+        label_SalesTableTitle.setBackground(new java.awt.Color(204, 255, 255));
+        label_SalesTableTitle.setFont(new java.awt.Font("MesloLGM Nerd Font", 1, 24)); // NOI18N
+        label_SalesTableTitle.setForeground(new java.awt.Color(255, 255, 255));
+        label_SalesTableTitle.setText("Sales Table");
 
-        table_SalesDashboard.setModel(new javax.swing.table.DefaultTableModel(
+        table_SalesDatabase.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -50,9 +82,9 @@ public class SalesDatabase extends javax.swing.JFrame {
                 "No.", "Customer ID", "Customer Name", "Start DateTime", "End DateTime", "Duration", "Hall Type", "Reason", "Sales (RM)"
             }
         ));
-        jScrollPane1.setViewportView(table_SalesDashboard);
-        if (table_SalesDashboard.getColumnModel().getColumnCount() > 0) {
-            table_SalesDashboard.getColumnModel().getColumn(0).setPreferredWidth(25);
+        jScrollPane1.setViewportView(table_SalesDatabase);
+        if (table_SalesDatabase.getColumnModel().getColumnCount() > 0) {
+            table_SalesDatabase.getColumnModel().getColumn(0).setPreferredWidth(25);
         }
 
         aside_PanelFilter.setBackground(new java.awt.Color(0, 153, 204));
@@ -139,7 +171,7 @@ public class SalesDatabase extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(aside_PanelFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(body_PanelMainLayout.createSequentialGroup()
-                        .addComponent(label_SalesDashboardTitle)
+                        .addComponent(label_SalesTableTitle)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -147,7 +179,7 @@ public class SalesDatabase extends javax.swing.JFrame {
             body_PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(body_PanelMainLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addComponent(label_SalesDashboardTitle)
+                .addComponent(label_SalesTableTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(body_PanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(aside_PanelFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -196,20 +228,26 @@ public class SalesDatabase extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SalesDatabase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerSalesDatabase2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SalesDatabase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerSalesDatabase2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SalesDatabase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerSalesDatabase2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SalesDatabase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagerSalesDatabase2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new SalesDatabase().setVisible(true);
+            new ManagerSalesDatabase2().setVisible(true);
         });
     }
 
@@ -220,10 +258,10 @@ public class SalesDatabase extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_HallType;
     private javax.swing.JLabel label_Sales;
-    private javax.swing.JLabel label_SalesDashboardTitle;
+    private javax.swing.JLabel label_SalesTableTitle;
     private javax.swing.JRadioButton radio_HallAuditorium;
     private javax.swing.JRadioButton radio_HallBanquet;
     private javax.swing.JRadioButton radio_HallMeetingRoom;
-    private javax.swing.JTable table_SalesDashboard;
+    private javax.swing.JTable table_SalesDatabase;
     // End of variables declaration//GEN-END:variables
 }
