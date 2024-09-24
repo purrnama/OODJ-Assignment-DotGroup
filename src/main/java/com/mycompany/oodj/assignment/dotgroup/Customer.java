@@ -29,4 +29,14 @@ public class Customer extends User {
         //replace this with your implementation
         return new JFrame();
     }
+    
+    public Issue getIssue() {
+    	return issue;
+    }
+    
+    public void setIssue(Issue issue) {
+    	this.issue = issue;
+    }
+     
+    private Issue issue;
 }

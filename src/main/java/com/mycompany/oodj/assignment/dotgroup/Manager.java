@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.oodj.assignment.dotgroup;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.swing.JFrame;
-/**
- *
- * @author purrnama
- */
+
 public class Manager extends User {
     public Manager(String username, String password){
         super(username, password);
@@ -28,5 +25,11 @@ public class Manager extends User {
     public JFrame openPanel(JFrame login){
         //replace this with your implementation
         return new JFrame();
+    }
+    
+    public void viewSales() {
+//    	String[] salesTotal = 
+    	
+    	
     }
 }

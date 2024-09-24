@@ -22,6 +22,7 @@ public class FileOperation {
     private File usersFile;
     private File scheduleFile;
     private File issuesFile;
+    private File salesFile;
     
     private FileOperation() {
         System.out.println("Initializing files..");
@@ -30,6 +31,8 @@ public class FileOperation {
             usersFile = new File("data", "users.txt");
             scheduleFile = new File("data", "schedule.txt");
             issuesFile = new File("data", "issues.txt");
+            salesFile = new File("data", "sales.txt");
+            
             if(hallsFile.createNewFile()){
                 System.out.println("New halls.txt file created.");
             } else {
@@ -50,6 +53,12 @@ public class FileOperation {
             } else {
                 System.out.println("Reading from existing issues.txt file");
             }
+            if(salesFile.createNewFile()){
+                System.out.println("New sales.txt file created.");
+            } else {
+                System.out.println("Reading from existing sales.txt file");
+            }
+            
         } catch (IOException e){
             System.out.println("An error occurred when initializing files.");
         }
@@ -88,10 +97,11 @@ public class FileOperation {
     }
     // generic method for reading a file, used internally
     // returns an ArrayList
-    private ArrayList<String> readFile(File f){
+    private ArrayList<String> readFile(File f) {
         ArrayList data = new ArrayList();
         try{
             Scanner s = new Scanner(f);
+            
             while(s.hasNextLine()){
                 String line = s.nextLine();
                 if(!line.isEmpty()){
@@ -185,6 +195,18 @@ public class FileOperation {
         write(issuesFile, i.toString());
     }
     
+    public ArrayList readSales() {
+        ArrayList<String> data = readFile(salesFile);
+        ArrayList<ManagerSales> salesData = new ArrayList();
+
+        for (String line : data){
+            ManagerSales i = ManagerSales.parse(line);
+            salesData.add(i);
+        }
+        
+        return salesData;
+    }
+    
     public ArrayList read(FileType type){
         if(type == FileType.HALLS){
             ArrayList<String> data = readFile(hallsFile);
@@ -242,6 +264,16 @@ public class FileOperation {
                 issueData.add(i);
             }
             return issueData;
+        }
+        
+        if (type == FileType.SALES) {
+            ArrayList<String> data = readFile(salesFile);
+            ArrayList<ManagerSales> salesData = new ArrayList();
+            for (String line : data) {
+                ManagerSales i = ManagerSales.parse(line);
+                salesData.add(i);
+            }
+            return salesData;
         }
         return new ArrayList();
     }

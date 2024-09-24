@@ -8,7 +8,10 @@ package com.mycompany.oodj.assignment.dotgroup;
  *
  * @author purrnama
  */
-public enum IssueStatus {
+public enum IssueState {
     OPEN,
-    CLOSED
+    CLOSED,
+    REOPENED,
+    RESOLVED,
+    NONE
 }
