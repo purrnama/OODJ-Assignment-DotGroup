@@ -244,6 +244,14 @@ public class SchedulerPanel extends javax.swing.JFrame {
         lblDate6 = new javax.swing.JLabel();
         cBoxPeriodHall = new javax.swing.JComboBox<>();
         cBoxPeriodType = new javax.swing.JComboBox<>();
+        lblDate7 = new javax.swing.JLabel();
+        cBoxPeriodIssue = new javax.swing.JComboBox<>();
+        panelIssues = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblAssignedIssues = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txtAreaIssueBody = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -468,6 +476,9 @@ public class SchedulerPanel extends javax.swing.JFrame {
 
         cBoxPeriodType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BOOKING", "MAINTENANCE" }));
 
+        lblDate7.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        lblDate7.setText("Issue:");
+
         javax.swing.GroupLayout panelScheduleLayout = new javax.swing.GroupLayout(panelSchedule);
         panelSchedule.setLayout(panelScheduleLayout);
         panelScheduleLayout.setHorizontalGroup(
@@ -478,32 +489,12 @@ public class SchedulerPanel extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelScheduleLayout.createSequentialGroup()
-                        .addGroup(panelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelScheduleLayout.createSequentialGroup()
+                        .addGroup(panelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelScheduleLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(panelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblDate4)
-                                    .addComponent(lblDate2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelScheduleLayout.createSequentialGroup()
-                                        .addComponent(spinnerPeriodStartHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(spinnerPeriodStartMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panelScheduleLayout.createSequentialGroup()
-                                        .addComponent(spinnerPeriodEndHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(spinnerPeriodEndMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panelScheduleLayout.createSequentialGroup()
-                                        .addComponent(btnCreatePeriod)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnEditPeriod))
-                                    .addComponent(btnDeletePeriod)))
-                            .addGroup(panelScheduleLayout.createSequentialGroup()
-                                .addGap(47, 47, 47)
                                 .addComponent(lblDate5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cBoxPeriodType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cBoxPeriodType, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelScheduleLayout.createSequentialGroup()
                                 .addGap(52, 52, 52)
                                 .addComponent(lblDate6))
@@ -515,7 +506,29 @@ public class SchedulerPanel extends javax.swing.JFrame {
                                         .addComponent(lblDate3))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(txtBoxPeriodTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(datePickerPeriodDate, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(datePickerPeriodDate, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelScheduleLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(panelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblDate4)
+                                    .addComponent(lblDate2)
+                                    .addComponent(lblDate7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelScheduleLayout.createSequentialGroup()
+                                        .addComponent(spinnerPeriodEndHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(spinnerPeriodEndMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(panelScheduleLayout.createSequentialGroup()
+                                        .addComponent(btnCreatePeriod)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnEditPeriod))
+                                    .addComponent(btnDeletePeriod)
+                                    .addGroup(panelScheduleLayout.createSequentialGroup()
+                                        .addComponent(spinnerPeriodStartHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(spinnerPeriodStartMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cBoxPeriodIssue, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(panelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(calSchedule, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -551,10 +564,14 @@ public class SchedulerPanel extends javax.swing.JFrame {
                         .addGroup(panelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblDate3)
                             .addComponent(datePickerPeriodDate, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cBoxPeriodType, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblDate5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cBoxPeriodIssue, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDate7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(spinnerPeriodStartMinute, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -575,6 +592,56 @@ public class SchedulerPanel extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Schedule", panelSchedule);
+
+        jLabel9.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel9.setText("Assigned Issues");
+
+        tblAssignedIssues.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Subject", "Issued by", "Status"
+            }
+        ));
+        jScrollPane2.setViewportView(tblAssignedIssues);
+
+        txtAreaIssueBody.setColumns(20);
+        txtAreaIssueBody.setRows(5);
+        jScrollPane5.setViewportView(txtAreaIssueBody);
+
+        javax.swing.GroupLayout panelIssuesLayout = new javax.swing.GroupLayout(panelIssues);
+        panelIssues.setLayout(panelIssuesLayout);
+        panelIssuesLayout.setHorizontalGroup(
+            panelIssuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelIssuesLayout.createSequentialGroup()
+                .addGroup(panelIssuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelIssuesLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panelIssuesLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        panelIssuesLayout.setVerticalGroup(
+            panelIssuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelIssuesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addGroup(panelIssuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Issues", panelIssues);
 
         jLabel8.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel8.setText("Hall Booking Management System");
@@ -746,6 +813,7 @@ public class SchedulerPanel extends javax.swing.JFrame {
     private javax.swing.JButton btnEditHall;
     private javax.swing.JButton btnEditPeriod;
     private javax.swing.JComboBox<String> cBoxPeriodHall;
+    private javax.swing.JComboBox<String> cBoxPeriodIssue;
     private javax.swing.JComboBox<String> cBoxPeriodType;
     private com.toedter.calendar.JCalendar calSchedule;
     private com.toedter.calendar.JDateChooser datePickerPeriodDate;
@@ -757,8 +825,11 @@ public class SchedulerPanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblDate1;
@@ -767,7 +838,9 @@ public class SchedulerPanel extends javax.swing.JFrame {
     private javax.swing.JLabel lblDate4;
     private javax.swing.JLabel lblDate5;
     private javax.swing.JLabel lblDate6;
+    private javax.swing.JLabel lblDate7;
     private javax.swing.JPanel panelHall;
+    private javax.swing.JPanel panelIssues;
     private javax.swing.JPanel panelSchedule;
     private javax.swing.JPanel panelScheduler;
     private javax.swing.JSpinner spinnerHourlyRate;
@@ -776,8 +849,10 @@ public class SchedulerPanel extends javax.swing.JFrame {
     private javax.swing.JSpinner spinnerPeriodStartHour;
     private javax.swing.JSpinner spinnerPeriodStartMinute;
     private javax.swing.JSpinner spinnerTotalSeats;
+    private javax.swing.JTable tblAssignedIssues;
     private javax.swing.JTable tblHalls;
     private javax.swing.JTable tblPeriods;
+    private javax.swing.JTextArea txtAreaIssueBody;
     private javax.swing.JTextField txtBoxHallSearch;
     private javax.swing.JTextField txtBoxName;
     private javax.swing.JTextField txtBoxPeriodTitle;
