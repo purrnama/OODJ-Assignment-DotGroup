@@ -77,28 +77,13 @@ public class Issue {
 //        System.out.println(IssueState.valueOf(state));
 //        IssueState state = IssueState.valueOf(state);
        
-        IssueState state = IssueState.NONE;
-        switch (col[4]) {
-            case "OPEN"     -> state = IssueState.OPEN;
-            case "CLOSED"   -> state = IssueState.CLOSED;
-            case "REOPENED" -> state = IssueState.REOPENED;
-            case "RESOLVED" -> state = IssueState.RESOLVED;
-            default         -> state = IssueState.NONE;
-        }
+        IssueState state = IssueState.valueOf(col[4]);
                 
         String confirmation = col[5];
         String reporterName = col[6];
         String assigneeName = col[7];
         
-        IssueMaintenanceStatus status = IssueMaintenanceStatus.NONE;
-        switch (col[8]) {
-            case "IN_PROGRESS"  -> status = IssueMaintenanceStatus.IN_PROGRESS;
-            case "DONE"         -> status = IssueMaintenanceStatus.DONE;
-            case "CLOSED"       -> status = IssueMaintenanceStatus.CLOSED;
-            case "CANCELLED"    -> status = IssueMaintenanceStatus.CANCELLED;
-            case "COMPLETED"    -> status = IssueMaintenanceStatus.COMPLETED;
-            default             -> status = IssueMaintenanceStatus.NONE;
-        }
+        IssueMaintenanceStatus status = IssueMaintenanceStatus.valueOf(col[8]);
         
         
 //        if (IssueState.valueOf(status) == )
