@@ -14,6 +14,7 @@ public class Period {
     private LocalDateTime endTime;
     private Hall hall;
     private PeriodType type;
+    private Issue issue;
     private String title;
     private Customer bookedBy;
     private Scheduler scheduledBy;
