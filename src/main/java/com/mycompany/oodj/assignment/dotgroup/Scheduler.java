@@ -30,7 +30,7 @@ public class Scheduler extends User {
     }
     
     public JFrame openPanel(JFrame login){
-        SchedulerPanel panel = new SchedulerPanel();
+        SchedulerPanel panel = new SchedulerPanel(this);
         panel.setVisible(true);
         panel.addWindowListener(new WindowAdapter(){
             public void windowClosing(WindowEvent e){

@@ -25,16 +25,30 @@ public class SchedulerPanel extends javax.swing.JFrame {
     FileOperation file = FileOperation.getInstance();
     ListSelectionModel cellHallSelection;
     ListSelectionModel cellPeriodSelection;
+    ListSelectionModel cellIssueSelection;
     Hall selectedHall;
     Period selectedPeriod;
+    Issue selectedIssue;
+    Scheduler currentScheduler;
+    Scheduler defaultScheduler = new Scheduler("defaultScheduler", "12345");
     /**
      * Creates new form SchedulerPanel
      */
-    public SchedulerPanel() {
-        initComponents();
-        updateHallsTable(loadHalls());
+    public SchedulerPanel(Scheduler scheduler) {
         
-        //Add event listener when a row is selected in halls and periods table
+        //set default scheduler if no scheduler is given
+        if(scheduler == null){
+            currentScheduler = defaultScheduler;
+        } else {
+            currentScheduler = scheduler;
+        }
+        initComponents();
+        lblSchedulerUsername.setText(currentScheduler.getUsername());
+        
+        updateHallsTable(loadHalls());
+        updateAssignedIssuesTable(loadAssignedIssues());
+        
+        //Add event listener when a row is selected in halls, periods and assigned issues table
         cellHallSelection = tblHalls.getSelectionModel();
         cellHallSelection.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         cellHallSelection.addListSelectionListener(new ListSelectionListener(){
@@ -66,10 +80,23 @@ public class SchedulerPanel extends javax.swing.JFrame {
             }
         });
         
-        ArrayList<Hall> halls = file.read(FileType.HALLS);
-        for( Hall h : halls){
+        cellIssueSelection = tblAssignedIssues.getSelectionModel();
+        cellIssueSelection.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        cellIssueSelection.addListSelectionListener(new ListSelectionListener(){
+            public void valueChanged(ListSelectionEvent e){
+                selectedIssue = getSelectedIssue();
+                txtBoxAssignedIssueSubject.setText(selectedIssue.getSubject());
+                txtAreaAssignedIssueBody.setText(selectedIssue.getBody());
+            }
+        });
+        
+        // fill combo boxes
+        ArrayList<Hall> halls = loadHalls();
+        for (Hall h : halls){
             cBoxPeriodHall.addItem(h.getName());
         }
+        updatePeriodIssueCBox(loadAssignedIssues());
+        
     }
     
     private ArrayList<Hall> loadHalls(){
@@ -80,11 +107,39 @@ public class SchedulerPanel extends javax.swing.JFrame {
         return file.read(FileType.SCHEDULE);
     }
     
+    private ArrayList<Issue> loadAssignedIssues(){
+        ArrayList<Issue> issues = file.read(FileType.ISSUES);
+        ArrayList<Issue> assignedIssues = new ArrayList();
+        for (Issue i : issues){
+            if(i.getAssigneeName().equals(currentScheduler.getUsername())){
+                assignedIssues.add(i);
+            }
+        }
+        return assignedIssues;
+    };
+    
     private void updateHallsTable(ArrayList<Hall> halls){
         DefaultTableModel model = (DefaultTableModel)tblHalls.getModel();
         model.setRowCount(0);
         for (Hall h : halls){
             model.addRow(new Object[]{h.getName(), h.getHourlyRate(), h.getTotalSeats()});
+        }
+    }
+    
+    private void updateAssignedIssuesTable(ArrayList<Issue> issues){
+        DefaultTableModel model = (DefaultTableModel)tblAssignedIssues.getModel();
+        model.setRowCount(0);
+        for(Issue i : issues){
+            model.addRow(new Object[]{i.getIssueId(), i.getSubject(), i.getCustomerName(), i.getStatus()});
+        }
+    }
+    
+    private void updatePeriodIssueCBox(ArrayList<Issue> issues){
+        cBoxPeriodIssue.removeAllItems();
+        for (Issue i : issues){
+            if(i.getStatus() == IssueMaintenanceStatus.IN_PROGRESS){
+                cBoxPeriodIssue.addItem(i.getIssueId());
+            }
         }
     }
     
@@ -112,6 +167,20 @@ public class SchedulerPanel extends javax.swing.JFrame {
             for(Period p : periods){
                 if(p.getTitle().equals(title)){
                     return p;
+                }
+            }
+        }
+        return null;
+    }
+    
+    private Issue getSelectedIssue(){
+        int selected = tblAssignedIssues.getSelectedRow();
+        if(selected >= 0){
+            String subject = (String)tblAssignedIssues.getValueAt(selected, 1);
+            ArrayList<Issue> issues = file.read(FileType.ISSUES);
+            for (Issue i : issues){
+                if(i.getSubject().equals(subject)){
+                    return i;
                 }
             }
         }
@@ -163,7 +232,7 @@ public class SchedulerPanel extends javax.swing.JFrame {
         PeriodType type = PeriodType.valueOf(cBoxPeriodType.getSelectedItem().toString().toUpperCase());
         LocalDateTime startDateTime = LocalDateTime.of(date, startTime);
         LocalDateTime endDateTime = LocalDateTime.of(date, endTime);
-        Period p = new Period(startDateTime, endDateTime, hall, type, title, PeriodStatus.ACTIVE, null, null);
+        Period p = new Period(startDateTime, endDateTime, hall, type, title, PeriodStatus.ACTIVE, null, currentScheduler);
         return p;
     }
     
@@ -250,9 +319,13 @@ public class SchedulerPanel extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblAssignedIssues = new javax.swing.JTable();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        txtAreaIssueBody = new javax.swing.JTextArea();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        txtAreaAssignedIssueBody = new javax.swing.JTextArea();
+        txtBoxAssignedIssueSubject = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        lblSchedulerUsername = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -475,9 +548,16 @@ public class SchedulerPanel extends javax.swing.JFrame {
         });
 
         cBoxPeriodType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BOOKING", "MAINTENANCE" }));
+        cBoxPeriodType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cBoxPeriodTypeActionPerformed(evt);
+            }
+        });
 
         lblDate7.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         lblDate7.setText("Issue:");
+
+        cBoxPeriodIssue.setEnabled(false);
 
         javax.swing.GroupLayout panelScheduleLayout = new javax.swing.GroupLayout(panelSchedule);
         panelSchedule.setLayout(panelScheduleLayout);
@@ -598,20 +678,27 @@ public class SchedulerPanel extends javax.swing.JFrame {
 
         tblAssignedIssues.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Subject", "Issued by", "Status"
+                "Issue ID", "Subject", "Issued by", "Status"
             }
         ));
         jScrollPane2.setViewportView(tblAssignedIssues);
 
-        txtAreaIssueBody.setColumns(20);
-        txtAreaIssueBody.setRows(5);
-        jScrollPane5.setViewportView(txtAreaIssueBody);
+        jLabel10.setText("Body:");
+
+        txtAreaAssignedIssueBody.setEditable(false);
+        txtAreaAssignedIssueBody.setColumns(20);
+        txtAreaAssignedIssueBody.setRows(5);
+        jScrollPane6.setViewportView(txtAreaAssignedIssueBody);
+
+        txtBoxAssignedIssueSubject.setEditable(false);
+
+        jLabel11.setText("Subject");
 
         javax.swing.GroupLayout panelIssuesLayout = new javax.swing.GroupLayout(panelIssues);
         panelIssues.setLayout(panelIssuesLayout);
@@ -619,15 +706,21 @@ public class SchedulerPanel extends javax.swing.JFrame {
             panelIssuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelIssuesLayout.createSequentialGroup()
                 .addGroup(panelIssuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelIssuesLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel9)
                     .addGroup(panelIssuesLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(panelIssuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelIssuesLayout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtBoxAssignedIssueSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelIssuesLayout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         panelIssuesLayout.setVerticalGroup(
             panelIssuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -637,7 +730,14 @@ public class SchedulerPanel extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panelIssuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelIssuesLayout.createSequentialGroup()
+                        .addGroup(panelIssuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtBoxAssignedIssueSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelIssuesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -646,18 +746,25 @@ public class SchedulerPanel extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel8.setText("Hall Booking Management System");
 
+        lblSchedulerUsername.setText("username");
+
         javax.swing.GroupLayout panelSchedulerLayout = new javax.swing.GroupLayout(panelScheduler);
         panelScheduler.setLayout(panelSchedulerLayout);
         panelSchedulerLayout.setHorizontalGroup(
             panelSchedulerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSchedulerLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
                 .addGroup(panelSchedulerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTabbedPane1)
                     .addGroup(panelSchedulerLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel8)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblSchedulerUsername))
+                    .addGroup(panelSchedulerLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(panelSchedulerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTabbedPane1)
+                            .addGroup(panelSchedulerLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel8)))))
                 .addGap(18, 18, 18))
         );
         panelSchedulerLayout.setVerticalGroup(
@@ -667,7 +774,9 @@ public class SchedulerPanel extends javax.swing.JFrame {
                 .addGroup(panelSchedulerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSchedulerUsername)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -682,7 +791,7 @@ public class SchedulerPanel extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelScheduler, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 62, Short.MAX_VALUE))
+                .addGap(0, 49, Short.MAX_VALUE))
         );
 
         pack();
@@ -723,6 +832,27 @@ public class SchedulerPanel extends javax.swing.JFrame {
         Period p = getInputPeriod();
         if(p == null){
             return;
+        }
+        if(p.getType() == PeriodType.MAINTENANCE){
+            if(cBoxPeriodIssue.getSelectedItem() != null){
+                Issue currentIssue = null;
+                String issueId = cBoxPeriodIssue.getSelectedItem().toString();
+                ArrayList<Issue> issues = loadAssignedIssues();
+                for(Issue i : issues){
+                    if(i.getIssueId().equals(issueId)){
+                        currentIssue = i;
+                        break;
+                    }
+                }
+                if(currentIssue != null){
+                    Issue newIssue = currentIssue;
+                    newIssue.setStatus(IssueMaintenanceStatus.IN_PROGRESS);
+                    file.update(currentIssue, newIssue);
+                    updateAssignedIssuesTable(loadAssignedIssues());
+                    updatePeriodIssueCBox(loadAssignedIssues());
+                }
+            }
+            
         }
         file.create(p);
         LocalDate date = convertToLocalDate(calSchedule.getDate());
@@ -770,6 +900,14 @@ public class SchedulerPanel extends javax.swing.JFrame {
         updateHallsTable(filtered);
     }//GEN-LAST:event_txtBoxHallSearchActionPerformed
 
+    private void cBoxPeriodTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBoxPeriodTypeActionPerformed
+        if(PeriodType.valueOf(cBoxPeriodType.getSelectedItem().toString().toUpperCase()) == PeriodType.MAINTENANCE){
+            cBoxPeriodIssue.setEnabled(true);
+        } else {
+            cBoxPeriodIssue.setEnabled(false);
+        }
+    }//GEN-LAST:event_cBoxPeriodTypeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -800,7 +938,7 @@ public class SchedulerPanel extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SchedulerPanel().setVisible(true);
+                new SchedulerPanel(null).setVisible(true);
             }
         });
     }
@@ -818,6 +956,8 @@ public class SchedulerPanel extends javax.swing.JFrame {
     private com.toedter.calendar.JCalendar calSchedule;
     private com.toedter.calendar.JDateChooser datePickerPeriodDate;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -829,7 +969,7 @@ public class SchedulerPanel extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblDate1;
@@ -839,6 +979,7 @@ public class SchedulerPanel extends javax.swing.JFrame {
     private javax.swing.JLabel lblDate5;
     private javax.swing.JLabel lblDate6;
     private javax.swing.JLabel lblDate7;
+    private javax.swing.JLabel lblSchedulerUsername;
     private javax.swing.JPanel panelHall;
     private javax.swing.JPanel panelIssues;
     private javax.swing.JPanel panelSchedule;
@@ -852,7 +993,8 @@ public class SchedulerPanel extends javax.swing.JFrame {
     private javax.swing.JTable tblAssignedIssues;
     private javax.swing.JTable tblHalls;
     private javax.swing.JTable tblPeriods;
-    private javax.swing.JTextArea txtAreaIssueBody;
+    private javax.swing.JTextArea txtAreaAssignedIssueBody;
+    private javax.swing.JTextField txtBoxAssignedIssueSubject;
     private javax.swing.JTextField txtBoxHallSearch;
     private javax.swing.JTextField txtBoxName;
     private javax.swing.JTextField txtBoxPeriodTitle;
