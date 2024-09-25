@@ -9,7 +9,7 @@ import javax.swing.JFrame;
  *
  * @author purrnama
  */
-public abstract class User {
+public abstract class User implements HasPanel {
     private String username;
     private String password;
     
