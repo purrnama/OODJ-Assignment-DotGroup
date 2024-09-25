@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.oodj.assignment.dotgroup;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 /**
  *
@@ -26,7 +28,13 @@ public class Administrator extends User {
     }
     
     public JFrame openPanel(JFrame login){
-        //replace this with your implementation
-        return new JFrame();
+        AdminPanel panel = new AdminPanel();
+        panel.setVisible(true);
+        panel.addWindowListener(new WindowAdapter(){
+            public void windowClosing(WindowEvent e){
+                login.setVisible(true);
+            }
+        });
+        return panel;
     }
 }
