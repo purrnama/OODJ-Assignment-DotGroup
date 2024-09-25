@@ -195,18 +195,6 @@ public class FileOperation {
         write(issuesFile, i.toString());
     }
     
-    public ArrayList readSales() {
-        ArrayList<String> data = readFile(salesFile);
-        ArrayList<ManagerSales> salesData = new ArrayList();
-
-        for (String line : data){
-            ManagerSales i = ManagerSales.parse(line);
-            salesData.add(i);
-        }
-        
-        return salesData;
-    }
-    
     public ArrayList read(FileType type){
         if(type == FileType.HALLS){
             ArrayList<String> data = readFile(hallsFile);

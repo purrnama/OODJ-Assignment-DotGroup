@@ -15,8 +15,7 @@ public class ManagerSalesDatabase2 extends javax.swing.JFrame {
     }
     
     private ArrayList<ManagerSales> loadSales() {
-        return file.readSales();
-//        return file.readSales(FileType.SALES);
+        return file.read(FileType.SALES);
     }
     
     private void updateSalesTable(ArrayList<ManagerSales> sales) {
