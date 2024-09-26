@@ -254,7 +254,7 @@ public class ManagerSalesDatabase extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        body_PanelMain.setBackground(new java.awt.Color(0, 0, 51));
+        body_PanelMain.setBackground(new java.awt.Color(21, 128, 61));
 
         label_SalesTableTitle.setBackground(new java.awt.Color(204, 255, 255));
         label_SalesTableTitle.setFont(new java.awt.Font("MesloLGM Nerd Font", 1, 24)); // NOI18N
@@ -283,7 +283,7 @@ public class ManagerSalesDatabase extends javax.swing.JFrame {
             table_SalesDatabase.getColumnModel().getColumn(0).setPreferredWidth(25);
         }
 
-        aside_PanelFilter.setBackground(new java.awt.Color(0, 153, 204));
+        aside_PanelFilter.setBackground(new java.awt.Color(74, 222, 128));
 
         button_Filter.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         button_Filter.setText("Filter");
@@ -457,7 +457,7 @@ public class ManagerSalesDatabase extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(aside_PanelFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -473,8 +473,8 @@ public class ManagerSalesDatabase extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(body_PanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addComponent(body_PanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();

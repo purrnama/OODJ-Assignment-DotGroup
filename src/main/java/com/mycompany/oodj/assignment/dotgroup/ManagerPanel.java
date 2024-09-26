@@ -34,17 +34,20 @@ public class ManagerPanel extends javax.swing.JFrame {
         button_Maintenance = new javax.swing.JButton();
         button_SalesDatabase = new javax.swing.JButton();
         button_BackToLogin = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
         setAutoRequestFocus(false);
 
-        panel_Manager.setBackground(new java.awt.Color(153, 255, 51));
+        panel_Manager.setBackground(new java.awt.Color(21, 128, 61));
+        panel_Manager.setForeground(new java.awt.Color(5, 46, 22));
 
         label_ManagerPanelTitle.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         label_ManagerPanelTitle.setText("Manager Panel");
 
-        button_Maintenance.setBackground(new java.awt.Color(255, 153, 51));
+        button_Maintenance.setBackground(new java.awt.Color(245, 158, 11));
         button_Maintenance.setToolTipText("Go to Maintenance");
         button_Maintenance.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -60,7 +63,7 @@ public class ManagerPanel extends javax.swing.JFrame {
             }
         });
 
-        button_SalesDatabase.setBackground(new java.awt.Color(51, 204, 255));
+        button_SalesDatabase.setBackground(new java.awt.Color(6, 182, 212));
         button_SalesDatabase.setToolTipText("Go to View Sales Database");
         button_SalesDatabase.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -76,32 +79,45 @@ public class ManagerPanel extends javax.swing.JFrame {
             }
         });
 
-        button_BackToLogin.setText("Back to Login");
+        button_BackToLogin.setText("Logout");
         button_BackToLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_BackToLoginActionPerformed(evt);
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel1.setText("Sales");
+
+        jLabel2.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel2.setText("Issues");
+
         javax.swing.GroupLayout panel_ManagerLayout = new javax.swing.GroupLayout(panel_Manager);
         panel_Manager.setLayout(panel_ManagerLayout);
         panel_ManagerLayout.setHorizontalGroup(
             panel_ManagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_ManagerLayout.createSequentialGroup()
-                .addContainerGap(260, Short.MAX_VALUE)
-                .addComponent(button_SalesDatabase, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80)
-                .addComponent(button_Maintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(259, 259, 259))
             .addGroup(panel_ManagerLayout.createSequentialGroup()
                 .addGroup(panel_ManagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_ManagerLayout.createSequentialGroup()
                         .addGap(292, 292, 292)
                         .addComponent(label_ManagerPanelTitle))
                     .addGroup(panel_ManagerLayout.createSequentialGroup()
-                        .addGap(418, 418, 418)
-                        .addComponent(button_BackToLogin)))
+                        .addGap(312, 312, 312)
+                        .addComponent(jLabel1)
+                        .addGap(201, 201, 201)
+                        .addComponent(jLabel2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_ManagerLayout.createSequentialGroup()
+                .addContainerGap(260, Short.MAX_VALUE)
+                .addGroup(panel_ManagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_ManagerLayout.createSequentialGroup()
+                        .addComponent(button_SalesDatabase, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)
+                        .addComponent(button_Maintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(259, 259, 259))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_ManagerLayout.createSequentialGroup()
+                        .addComponent(button_BackToLogin)
+                        .addGap(423, 423, 423))))
         );
         panel_ManagerLayout.setVerticalGroup(
             panel_ManagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,9 +128,13 @@ public class ManagerPanel extends javax.swing.JFrame {
                 .addGroup(panel_ManagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(button_Maintenance, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(button_SalesDatabase, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_ManagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(button_BackToLogin)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addGap(140, 140, 140))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -127,9 +147,7 @@ public class ManagerPanel extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(panel_Manager, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(121, 121, 121))
+            .addComponent(panel_Manager, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -208,6 +226,8 @@ public class ManagerPanel extends javax.swing.JFrame {
     private javax.swing.JButton button_BackToLogin;
     private javax.swing.JButton button_Maintenance;
     private javax.swing.JButton button_SalesDatabase;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel label_ManagerPanelTitle;
     private javax.swing.JPanel panel_Manager;
     // End of variables declaration//GEN-END:variables

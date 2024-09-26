@@ -336,10 +336,18 @@ public class SchedulerPanel extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        panelScheduler.setBackground(new java.awt.Color(219, 39, 119));
+        panelScheduler.setForeground(new java.awt.Color(80, 7, 36));
+
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jLabel1.setText("SCHEDULER");
 
+        jTabbedPane1.setBackground(new java.awt.Color(249, 168, 212));
+        jTabbedPane1.setForeground(new java.awt.Color(80, 7, 36));
         jTabbedPane1.setToolTipText("");
+
+        panelHall.setBackground(new java.awt.Color(249, 168, 212));
+        panelHall.setForeground(new java.awt.Color(80, 7, 36));
 
         jLabel2.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel2.setText("Manage Halls");
@@ -478,6 +486,9 @@ public class SchedulerPanel extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Halls", panelHall);
+
+        panelSchedule.setBackground(new java.awt.Color(249, 168, 212));
+        panelSchedule.setForeground(new java.awt.Color(80, 7, 36));
 
         jLabel6.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel6.setText("Manage Schedule");
@@ -680,6 +691,9 @@ public class SchedulerPanel extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Schedule", panelSchedule);
 
+        panelIssues.setBackground(new java.awt.Color(249, 168, 212));
+        panelIssues.setForeground(new java.awt.Color(80, 7, 36));
+
         jLabel9.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel9.setText("Assigned Issues");
 
@@ -785,7 +799,7 @@ public class SchedulerPanel extends javax.swing.JFrame {
                 .addComponent(lblSchedulerUsername)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -796,9 +810,7 @@ public class SchedulerPanel extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelScheduler, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 49, Short.MAX_VALUE))
+            .addComponent(panelScheduler, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -853,8 +865,6 @@ public class SchedulerPanel extends javax.swing.JFrame {
             }
             if(currentIssue != null){
                 newIssue = new Issue(currentIssue.getIssueId(), currentIssue.getCustomerName(), currentIssue.getSubject(), currentIssue.getBody(), currentIssue.getState(), currentIssue.getConfirmation(), currentIssue.getReporterName(), currentIssue.getAssigneeName(), IssueMaintenanceStatus.IN_PROGRESS);
-                System.out.println(currentIssue);
-                System.out.println(newIssue);
                 file.update(currentIssue, newIssue);
             }
         }

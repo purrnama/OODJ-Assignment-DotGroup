@@ -153,7 +153,8 @@ public class AdminPanel extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(13, 148, 136));
+        jPanel1.setForeground(new java.awt.Color(4, 47, 46));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("ADMINISTRATOR");
@@ -161,9 +162,10 @@ public class AdminPanel extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("STAFF MANAGEMENT SYSTEM");
 
-        jTabbedPane1.setBackground(new java.awt.Color(204, 204, 255));
+        jTabbedPane1.setBackground(new java.awt.Color(153, 246, 228));
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel2.setBackground(new java.awt.Color(153, 246, 228));
+        jPanel2.setForeground(new java.awt.Color(4, 47, 46));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("STAFFNAME:");
@@ -267,7 +269,6 @@ public class AdminPanel extends javax.swing.JFrame {
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -311,7 +312,8 @@ public class AdminPanel extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Staff", jPanel2);
 
-        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel3.setBackground(new java.awt.Color(153, 246, 228));
+        jPanel3.setForeground(new java.awt.Color(4, 47, 46));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -378,7 +380,8 @@ public class AdminPanel extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("User", jPanel3);
 
-        jPanel5.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel5.setBackground(new java.awt.Color(153, 246, 228));
+        jPanel5.setForeground(new java.awt.Color(4, 47, 46));
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -587,7 +590,6 @@ public class AdminPanel extends javax.swing.JFrame {
     // Get the user details from the selected row
     String username = (String) jTable1.getValueAt(selectedRow, 0);
     String password = (String) jTable1.getValueAt(selectedRow, 1);
-    RoleType role = (RoleType) jTable1.getValueAt(selectedRow, 2); // Retrieve as RoleType
 
     // Confirm deletion dialog
     int confirm = JOptionPane.showConfirmDialog(this, 
@@ -598,26 +600,14 @@ public class AdminPanel extends javax.swing.JFrame {
     if (confirm != JOptionPane.YES_OPTION) {
         return;
     }
-
+    
     User userToDelete = null;
-
-    // Create the user object to delete based on the role
-    switch (role) {
-        case MANAGER:
-            userToDelete = new Manager(username, password);
+    ArrayList<User> users = file.read(FileType.USERS);
+    for(User u : users){
+        if(u.getUsername().equals(username)){
+            userToDelete = u;
             break;
-        case SCHEDULER:
-            userToDelete = new Scheduler(username, password);
-            break;
-        case ADMINISTRATOR:
-            userToDelete = new Administrator(username, password);
-            break;
-        case CUSTOMER:
-            userToDelete = new Customer(username, password);
-            break;
-        default:
-            JOptionPane.showMessageDialog(this, "Invalid role", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+        }
     }
 
     // Delete the user from the file

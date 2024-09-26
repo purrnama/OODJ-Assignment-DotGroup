@@ -51,6 +51,9 @@ public class LogIn extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(96, 165, 250));
+        jPanel1.setForeground(new java.awt.Color(23, 37, 84));
+
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
         jLabel1.setText("Username:");
 
