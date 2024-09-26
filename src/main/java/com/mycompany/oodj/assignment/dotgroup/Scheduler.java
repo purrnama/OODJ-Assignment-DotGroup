@@ -12,8 +12,16 @@ import java.awt.event.WindowEvent;
  */
 public class Scheduler extends User {
     
+    private boolean isAssignedHallMaintenance;
+    
     public Scheduler(String username, String password){
         super(username, password);
+        this.isAssignedHallMaintenance = false;
+    }
+    
+    public Scheduler(String username, String password, boolean isAssignedHallMaintenance){
+        super(username, password);
+        this.isAssignedHallMaintenance = isAssignedHallMaintenance; 
     }
 
     
@@ -21,12 +29,28 @@ public class Scheduler extends User {
         String[] col = line.split(",");
         String name = col[0];
         String password = col[1];
-        Scheduler s = new Scheduler(name, password);
+        
+        
+        String isAssignedHallMaintenanceString = null;
+        Scheduler s;
+        try {
+            isAssignedHallMaintenanceString = col[2];
+        } catch (ArrayIndexOutOfBoundsException e){
+            isAssignedHallMaintenanceString = null;
+        }
+
+        if (isAssignedHallMaintenanceString != null) {
+            boolean isAssignedHallMaintenance = "true".equals(isAssignedHallMaintenanceString);
+            s = new Scheduler(name, password, isAssignedHallMaintenance);
+        }  else {
+            s = new Scheduler(name, password);
+        }
+        
         return s;
     }
     
     public String toString(){
-        return this.getUsername() + "," + this.getPassword() + "," + RoleType.SCHEDULER;
+        return this.getUsername() + "," + this.getPassword() + "," + RoleType.SCHEDULER + "," + this.getIsAssignedHallMaintenance();
     }
     
     public JFrame openPanel(JFrame login){
@@ -38,5 +62,13 @@ public class Scheduler extends User {
             }
         });
         return panel;
+    }
+    
+    public boolean getIsAssignedHallMaintenance() {
+        return isAssignedHallMaintenance;
+    }
+
+    public void setIsAssignedHallMaintenance(boolean isAssignedHallMaintenance) {
+        this.isAssignedHallMaintenance = isAssignedHallMaintenance;
     }
 }

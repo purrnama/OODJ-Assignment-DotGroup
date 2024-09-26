@@ -1,7 +1,7 @@
 package com.mycompany.oodj.assignment.dotgroup;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 
@@ -23,13 +23,14 @@ public class Manager extends User {
     }
     
     public JFrame openPanel(JFrame login){
-        //replace this with your implementation
-        return new JFrame();
-    }
-    
-    public void viewSales() {
-//    	String[] salesTotal = 
-    	
-    	
+        ManagerPanel panel = new ManagerPanel();
+        panel.setVisible(true);
+        panel.addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e){
+                login.setVisible(true);
+            }
+        });
+        return panel;
     }
 }

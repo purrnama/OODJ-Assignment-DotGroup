@@ -85,8 +85,10 @@ public class SchedulerPanel extends javax.swing.JFrame {
         cellIssueSelection.addListSelectionListener(new ListSelectionListener(){
             public void valueChanged(ListSelectionEvent e){
                 selectedIssue = getSelectedIssue();
-                txtBoxAssignedIssueSubject.setText(selectedIssue.getSubject());
-                txtAreaAssignedIssueBody.setText(selectedIssue.getBody());
+                if(selectedIssue != null){
+                    txtBoxAssignedIssueSubject.setText(selectedIssue.getSubject());
+                    txtAreaAssignedIssueBody.setText(selectedIssue.getBody());
+                }
             }
         });
         
@@ -127,6 +129,7 @@ public class SchedulerPanel extends javax.swing.JFrame {
     }
     
     private void updateAssignedIssuesTable(ArrayList<Issue> issues){
+        selectedIssue = null;
         DefaultTableModel model = (DefaultTableModel)tblAssignedIssues.getModel();
         model.setRowCount(0);
         for(Issue i : issues){
@@ -137,7 +140,7 @@ public class SchedulerPanel extends javax.swing.JFrame {
     private void updatePeriodIssueCBox(ArrayList<Issue> issues){
         cBoxPeriodIssue.removeAllItems();
         for (Issue i : issues){
-            if(i.getStatus() == IssueMaintenanceStatus.IN_PROGRESS){
+            if(i.getStatus() == IssueMaintenanceStatus.NONE){
                 cBoxPeriodIssue.addItem(i.getIssueId());
             }
         }
@@ -166,6 +169,7 @@ public class SchedulerPanel extends javax.swing.JFrame {
             ArrayList<Period> periods = file.read(FileType.SCHEDULE);
             for(Period p : periods){
                 if(p.getTitle().equals(title)){
+                    System.out.println("Selected period:" + p);
                     return p;
                 }
             }
@@ -202,7 +206,6 @@ public class SchedulerPanel extends javax.swing.JFrame {
     }
     
     private Period getInputPeriod(){
-        System.out.println((String)cBoxPeriodHall.getSelectedItem());
         if(txtBoxPeriodTitle.getText().isEmpty()){
             warning("Period title cannot be empty.", "Invalid Period Title");
             return null;
@@ -230,9 +233,13 @@ public class SchedulerPanel extends javax.swing.JFrame {
         LocalTime startTime = LocalTime.of((Integer)spinnerPeriodStartHour.getValue(), (Integer)spinnerPeriodStartMinute.getValue());
         LocalTime endTime = LocalTime.of((Integer)spinnerPeriodEndHour.getValue(), (Integer)spinnerPeriodEndMinute.getValue());
         PeriodType type = PeriodType.valueOf(cBoxPeriodType.getSelectedItem().toString().toUpperCase());
+        String issueId = null;
+        if(type == PeriodType.MAINTENANCE){
+            issueId = cBoxPeriodIssue.getSelectedItem().toString();
+        }
         LocalDateTime startDateTime = LocalDateTime.of(date, startTime);
         LocalDateTime endDateTime = LocalDateTime.of(date, endTime);
-        Period p = new Period(startDateTime, endDateTime, hall, type, title, PeriodStatus.ACTIVE, null, currentScheduler);
+        Period p = new Period(startDateTime, endDateTime, hall, type, issueId, title, PeriodStatus.ACTIVE, null, currentScheduler);
         return p;
     }
     
@@ -834,30 +841,29 @@ public class SchedulerPanel extends javax.swing.JFrame {
             return;
         }
         if(p.getType() == PeriodType.MAINTENANCE){
-            if(cBoxPeriodIssue.getSelectedItem() != null){
-                Issue currentIssue = null;
-                String issueId = cBoxPeriodIssue.getSelectedItem().toString();
-                ArrayList<Issue> issues = loadAssignedIssues();
-                for(Issue i : issues){
-                    if(i.getIssueId().equals(issueId)){
-                        currentIssue = i;
-                        break;
-                    }
-                }
-                if(currentIssue != null){
-                    Issue newIssue = currentIssue;
-                    newIssue.setStatus(IssueMaintenanceStatus.IN_PROGRESS);
-                    file.update(currentIssue, newIssue);
-                    updateAssignedIssuesTable(loadAssignedIssues());
-                    updatePeriodIssueCBox(loadAssignedIssues());
+            System.out.println(p.getIssueId());
+            ArrayList<Issue> issues = loadAssignedIssues();
+            Issue currentIssue = null;
+            Issue newIssue = null;
+            for(Issue i : issues){
+                if(i.getIssueId().equals(p.getIssueId())){
+                    currentIssue = i;
+                    break;
                 }
             }
-            
+            if(currentIssue != null){
+                newIssue = new Issue(currentIssue.getIssueId(), currentIssue.getCustomerName(), currentIssue.getSubject(), currentIssue.getBody(), currentIssue.getState(), currentIssue.getConfirmation(), currentIssue.getReporterName(), currentIssue.getAssigneeName(), IssueMaintenanceStatus.IN_PROGRESS);
+                System.out.println(currentIssue);
+                System.out.println(newIssue);
+                file.update(currentIssue, newIssue);
+            }
         }
         file.create(p);
         LocalDate date = convertToLocalDate(calSchedule.getDate());
         lblDate.setText(date.format(DateTimeFormatter.ISO_LOCAL_DATE));
         updatePeriodsTable(getPeriodsByLocalDate(date));
+        updateAssignedIssuesTable(loadAssignedIssues());
+        updatePeriodIssueCBox(loadAssignedIssues());
     }//GEN-LAST:event_btnCreatePeriodActionPerformed
 
     private void btnEditPeriodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditPeriodActionPerformed

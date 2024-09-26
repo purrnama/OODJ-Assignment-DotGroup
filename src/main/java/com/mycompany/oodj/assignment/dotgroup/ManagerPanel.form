@@ -51,25 +51,25 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="260" max="32767" attributes="0"/>
+                  <Component id="button_SalesDatabase" min="-2" pref="162" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                  <Component id="button_Maintenance" min="-2" pref="162" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="259" max="-2" attributes="0"/>
+              </Group>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="366" max="-2" attributes="0"/>
-                          <Component id="button_Maintenance" min="-2" pref="162" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="292" max="-2" attributes="0"/>
                           <Component id="label_ManagerPanelTitle" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="418" max="-2" attributes="0"/>
+                          <Component id="button_BackToLogin" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="292" max="32767" attributes="0"/>
-              </Group>
-              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
-                      <Component id="button_SalesDashboard" min="-2" pref="162" max="-2" attributes="0"/>
-                      <EmptySpace pref="611" max="32767" attributes="0"/>
-                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -78,16 +78,14 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                   <Component id="label_ManagerPanelTitle" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
-                  <Component id="button_Maintenance" min="-2" pref="115" max="-2" attributes="0"/>
-                  <EmptySpace pref="132" max="32767" attributes="0"/>
-              </Group>
-              <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="222" max="32767" attributes="0"/>
-                      <Component id="button_SalesDashboard" min="-2" pref="115" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="button_Maintenance" min="-2" pref="115" max="-2" attributes="0"/>
+                      <Component id="button_SalesDatabase" min="-2" pref="115" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="button_BackToLogin" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="60" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -114,17 +112,25 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_MaintenanceActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="button_SalesDashboard">
+        <Component class="javax.swing.JButton" name="button_SalesDatabase">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="33" green="99" red="ff" type="rgb"/>
+              <Color blue="ff" green="cc" red="33" type="rgb"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Go to Sales Dashboard"/>
+            <Property name="toolTipText" type="java.lang.String" value="Go to View Sales Database"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="button_SalesDashboardMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="button_SalesDashboardMouseExited"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_SalesDashboardActionPerformed"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="button_SalesDatabaseMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="button_SalesDatabaseMouseExited"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_SalesDatabaseActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="button_BackToLogin">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Back to Login"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_BackToLoginActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

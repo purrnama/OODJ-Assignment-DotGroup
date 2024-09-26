@@ -25,12 +25,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="panel_ManagerMaintenance" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jScrollPane2" min="-2" pref="564" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -39,14 +34,17 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="panel_ManagerMaintenance" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jScrollPane2" min="-2" pref="258" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="panel_ManagerMaintenance">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="99" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -54,34 +52,34 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="label_IssueId" alignment="0" min="-2" pref="326" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="label_IssueId" alignment="0" min="-2" pref="326" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="label_CustomerName" max="32767" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="label_CustomerName" max="32767" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="label_Subject" min="-2" pref="116" max="-2" attributes="0"/>
-                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                              </Group>
-                                              <Component id="label_ConfirmationStatus" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="text_Subject" alignment="1" min="-2" pref="290" max="-2" attributes="0"/>
-                                              <Component id="combo_Confirmation" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="text_CustomerName" min="-2" pref="290" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="label_Subject" min="-2" pref="116" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="label_Body" min="-2" pref="116" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="jScrollPane3" min="-2" pref="290" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="label_ConfirmationStatus" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="text_Subject" alignment="1" min="-2" pref="290" max="-2" attributes="0"/>
+                                      <Component id="combo_Confirmation" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="text_CustomerName" min="-2" pref="290" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="label_Body" min="-2" pref="116" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jScrollPane3" min="-2" pref="290" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                           <Component id="label_SchedulerAssigneeName" alignment="0" max="32767" attributes="0"/>
@@ -90,92 +88,92 @@
                                       <Component id="label_Status" min="-2" pref="138" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="button_ConfirmMaintenance" min="-2" max="-2" attributes="0"/>
-                                      <Component id="text_ReporterName" min="-2" pref="290" max="-2" attributes="0"/>
-                                      <Component id="text_AssigneeName" min="-2" pref="290" max="-2" attributes="0"/>
-                                      <Component id="combo_Status" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="combo_Status" min="-2" pref="133" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="button_RemoveAssignScheduler" min="-2" pref="202" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="text_AssigneeName" min="-2" pref="290" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="button_AssignScheduler" min="-2" pref="150" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="text_ReporterName" min="-2" pref="290" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                          <Component id="button_UpdateStatus" min="-2" pref="133" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="button_AssignScheduler" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <Component id="button_UpdateStatus" min="-2" pref="133" max="-2" attributes="0"/>
-                                      <Component id="text_UpdateStatus" min="-2" pref="89" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="button_InsertData" min="-2" pref="101" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="button_ConfirmMaintenance" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="jScrollPane1" alignment="0" min="-2" pref="1063" max="-2" attributes="0"/>
-                      <Component id="label_MaintenanceTitle" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="label_MaintenanceTitle" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="button_ManagerPanel" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="127" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <Component id="label_MaintenanceTitle" min="-2" pref="52" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="label_MaintenanceTitle" min="-2" pref="52" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                          <Component id="button_ManagerPanel" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="label_IssueId" min="-2" pref="36" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="label_Subject" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                                      <Component id="text_Subject" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                      <Component id="label_CustomerName" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                                      <Component id="text_CustomerName" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                                      <Component id="label_ReporterName" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                                      <Component id="text_ReporterName" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                                      <Component id="button_UpdateStatus" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="label_SchedulerAssigneeName" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                                      <Component id="combo_Confirmation" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                                      <Component id="label_ConfirmationStatus" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                                      <Component id="text_AssigneeName" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                                      <Component id="text_UpdateStatus" alignment="3" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="combo_Status" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                                      <Component id="label_Status" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                                      <Component id="button_AssignScheduler" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="label_CustomerName" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="text_CustomerName" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="label_ReporterName" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="text_ReporterName" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="button_UpdateStatus" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="label_Body" min="-2" pref="36" max="-2" attributes="0"/>
-                              <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
-                              <Component id="button_ConfirmMaintenance" min="-2" pref="36" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="label_SchedulerAssigneeName" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="combo_Confirmation" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="label_ConfirmationStatus" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="text_AssigneeName" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="button_AssignScheduler" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="combo_Status" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="label_Status" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="button_RemoveAssignScheduler" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="button_ConfirmMaintenance" min="-2" pref="36" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="button_InsertData" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="label_Subject" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="text_Subject" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
+                              <Component id="label_Body" min="-2" pref="36" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="258" max="-2" attributes="0"/>
-                  <EmptySpace pref="11" max="32767" attributes="0"/>
+                  <EmptySpace pref="57" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -199,7 +197,7 @@
             <Component class="javax.swing.JTable" name="table_CustomerIssue">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="10" rowCount="4">
+                  <Table columnCount="9" rowCount="4">
                     <Column editable="true" title="Issue ID" type="java.lang.Object"/>
                     <Column editable="true" title="Customer Name" type="java.lang.Object"/>
                     <Column editable="true" title="Subject" type="java.lang.Object"/>
@@ -209,7 +207,6 @@
                     <Column editable="true" title="Reporter Name" type="java.lang.Object"/>
                     <Column editable="true" title="Assignee Name" type="java.lang.Object"/>
                     <Column editable="true" title="Status" type="java.lang.Object"/>
-                    <Column editable="true" title="Respond?" type="java.lang.Boolean"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -230,11 +227,6 @@
                       <Renderer/>
                     </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -307,11 +299,12 @@
         <Component class="javax.swing.JComboBox" name="combo_Status">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="In Progress"/>
-                <StringItem index="1" value="Done"/>
-                <StringItem index="2" value="Completed"/>
-                <StringItem index="3" value="Cancelled"/>
+              <StringArray count="5">
+                <StringItem index="0" value="IN_PROGRESS"/>
+                <StringItem index="1" value="DONE"/>
+                <StringItem index="2" value="CANCELLED"/>
+                <StringItem index="3" value="COMPLETED"/>
+                <StringItem index="4" value="NONE"/>
               </StringArray>
             </Property>
           </Properties>
@@ -377,10 +370,9 @@
         <Component class="javax.swing.JComboBox" name="combo_Confirmation">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
+              <StringArray count="2">
                 <StringItem index="0" value="Confirmed"/>
                 <StringItem index="1" value="Unconfirmed"/>
-                <StringItem index="2" value=" "/>
               </StringArray>
             </Property>
           </Properties>
@@ -399,6 +391,7 @@
         <Component class="javax.swing.JButton" name="button_ConfirmMaintenance">
           <Properties>
             <Property name="text" type="java.lang.String" value="Confirm Maintenance"/>
+            <Property name="toolTipText" type="java.lang.String" value="Notify customers about Hall issues"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_ConfirmMaintenanceActionPerformed"/>
@@ -430,84 +423,21 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="text_AssigneeNameActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="text_UpdateStatus">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="text_UpdateStatusActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="button_InsertData">
+        <Component class="javax.swing.JButton" name="button_ManagerPanel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Insert Data"/>
+            <Property name="text" type="java.lang.String" value="To Manager Panel"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_InsertDataActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_ManagerPanelActionPerformed"/>
           </Events>
         </Component>
-      </SubComponents>
-    </Container>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JTable" name="table_CustomerIssueMaintenanceConfirmed">
+        <Component class="javax.swing.JButton" name="button_RemoveAssignScheduler">
           <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="7" rowCount="4">
-                <Column editable="true" title="Issue ID" type="java.lang.Object"/>
-                <Column editable="true" title="Customer Name" type="java.lang.Object"/>
-                <Column editable="true" title="Hall Type" type="java.lang.Object"/>
-                <Column editable="true" title="Payment" type="java.lang.Object"/>
-                <Column editable="true" title="Subject" type="java.lang.Object"/>
-                <Column editable="true" title="Body" type="java.lang.Object"/>
-                <Column editable="true" title="Status" type="java.lang.Object"/>
-              </Table>
-            </Property>
-            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-              <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title value="Hall Type"/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title value="Payment"/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-              </TableColumnModel>
-            </Property>
-            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Remove Assign Scheduler"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_RemoveAssignSchedulerActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -153,10 +153,6 @@ public class FileOperation {
     private boolean isPeriodClashing(Period p1){
         ArrayList<Period> periods = read(FileType.SCHEDULE);
         for(Period p2 : periods){
-            System.out.println(p1);
-            System.out.println(p2);
-            System.out.println(p1.getStartTime().isBefore(p2.getEndTime()));
-            System.out.println(p2.getStartTime().isBefore(p1.getEndTime()));
             if(p1.getStartTime().isBefore(p2.getEndTime()) && p2.getStartTime().isBefore(p1.getEndTime())){
                 return true;
             }

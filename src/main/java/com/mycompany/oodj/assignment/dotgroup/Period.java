@@ -14,7 +14,7 @@ public class Period {
     private LocalDateTime endTime;
     private Hall hall;
     private PeriodType type;
-    private Issue issue;
+    private String issueId;
     private String title;
     private Customer bookedBy;
     private Scheduler scheduledBy;
@@ -25,11 +25,12 @@ public class Period {
         
     }
 
-    public Period(LocalDateTime startTime, LocalDateTime endTime, Hall hall, PeriodType type, String title, PeriodStatus status, Customer bookedBy, Scheduler scheduledBy) {
+    public Period(LocalDateTime startTime, LocalDateTime endTime, Hall hall, PeriodType type, String issueId, String title, PeriodStatus status, Customer bookedBy, Scheduler scheduledBy) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.hall = hall;
         this.type = type;
+        this.issueId = issueId;
         this.title = title;
         this.bookedBy = bookedBy;
         this.scheduledBy = scheduledBy;
@@ -46,7 +47,7 @@ public class Period {
         if(scheduledBy != null){
             strScheduledBy = scheduledBy.getUsername();
         }
-        return startTime + "," + endTime + "," + hall + "," + type + "," + title + "," + status + "," + strBookedBy + "," + strScheduledBy;
+        return startTime + "," + endTime + "," + hall + "," + type + "," + issueId + "," + title + "," + status + "," + strBookedBy + "," + strScheduledBy;
     }
     
     public static Period parse(String line){
@@ -56,20 +57,25 @@ public class Period {
         LocalDateTime endTime = LocalDateTime.parse(col[1]);
         Hall hall = Hall.parse(col[2] + "," + col[3] + "," + col[4]);
         PeriodType type = PeriodType.valueOf(col[5]);
-        String title = col[6];
-        PeriodStatus status = PeriodStatus.valueOf(col[7]);
+        String issueId = col[6];
+        String title = col[7];
+        PeriodStatus status = PeriodStatus.valueOf(col[8]);
         Customer bookedBy = null;
         Scheduler scheduledBy = null;
         ArrayList<User> users = file.read(FileType.USERS);
         for(User u : users){
-            if(u.getUsername() == col[8]){
-                bookedBy = new Customer(u.getUsername(), u.getPassword());
+            if(u instanceof Customer c){
+                if(c.getUsername().equals(col[9])){
+                    bookedBy = c;
+                }
             }
-            if(u.getUsername() == col[9]){
-                scheduledBy = new Scheduler(u.getUsername(), u.getPassword());
+            if(u instanceof Scheduler s){
+                if(s.getUsername().equals(col[10])){
+                    scheduledBy = s;
+                }
             }
         }
-        Period p = new Period(startTime, endTime, hall, type, title, status, bookedBy, scheduledBy);
+        Period p = new Period(startTime, endTime, hall, type, issueId, title, status, bookedBy, scheduledBy);
         return p;
     }
 
@@ -111,6 +117,14 @@ public class Period {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+    
+    public String getIssueId(){
+        return this.issueId;
+    }
+    
+    public void setIssueId(String issueId){
+        this.issueId = issueId;
     }
 
     public Customer getBookedBy() {
