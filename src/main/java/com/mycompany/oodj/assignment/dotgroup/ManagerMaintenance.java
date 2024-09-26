@@ -27,8 +27,9 @@ public class ManagerMaintenance extends javax.swing.JFrame {
             public void valueChanged(ListSelectionEvent e) {
                 selectedIssue = getSelectedIssue();
                 if (selectedIssue != null) {
-                    label_IssueId.setText("Issue ID:" + " " + 
-                        selectedIssue.getIssueId());
+                    label_IssueId.setText("Issue ID: " + selectedIssue.getIssueId() 
+                        + " ("  + selectedIssue.getState().name() + ")"
+                    );
                     text_CustomerName.setText(selectedIssue.getCustomerName());
                     text_Subject.setText(selectedIssue.getSubject());
                     textarea_Body.setText(selectedIssue.getBody());
