@@ -1,29 +1,13 @@
 package com.mycompany.oodj.assignment.dotgroup;
 
-import static com.mycompany.oodj.assignment.dotgroup.IssueMaintenanceStatus.CANCELLED;
-//import static com.mycompany.oodj.assignment.dotgroup.IssueMaintenanceStatus.CLOSED;
-import static com.mycompany.oodj.assignment.dotgroup.IssueMaintenanceStatus.DONE;
-import static com.mycompany.oodj.assignment.dotgroup.IssueMaintenanceStatus.IN_PROGRESS;
-import java.time.LocalDate;
-import java.time.LocalTime;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
-
 import javax.swing.JOptionPane;
 
 import java.util.ArrayList;
-import java.util.function.Consumer;
-import javax.swing.ListSelectionModel;
-//import javax.swing.ListModelListener;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
 
-//import javax.swing.table.TableModelEvent;
-//import javax.swing.table.TableModelListener;
+import javax.swing.ListSelectionModel;
 
 public class ManagerMaintenance extends javax.swing.JFrame {
 
@@ -31,9 +15,6 @@ public class ManagerMaintenance extends javax.swing.JFrame {
     
     Issue selectedIssue;
     ListSelectionModel cellIssueSelection;
-    
-    Customer customer;
-    Scheduler scheduler;
     
     final int STATUS_COLUMN = 8;
     
@@ -104,9 +85,6 @@ public class ManagerMaintenance extends javax.swing.JFrame {
         } else {
             return null;
         }
-        
-        
-
     }
     
     private ArrayList<Issue> loadIssues() {
@@ -220,7 +198,6 @@ public class ManagerMaintenance extends javax.swing.JFrame {
 
             String title = "Customer Issue: " + model.getValueAt(row, 2);
             
-            customer.setHasReportedHallIssue(true);  
             JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
         } else {
             warning("Please close the program and try again.", "Notify Customer Error");
@@ -317,12 +294,6 @@ public class ManagerMaintenance extends javax.swing.JFrame {
         panel.setVisible(true);
         this.dispose();
     }
-    
-//    private HashMap<Customer, ManagerSales> sales;
-//    private ArrayList<Customer> customerIssue;
-//    private Customer customer;
-//    private Issue issue;
-//    private Scheduler scheduler;
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -634,6 +605,7 @@ public class ManagerMaintenance extends javax.swing.JFrame {
            warning("Please select an issue to update", "No Issue Selected");
            return;
        }
+       
        Issue newIssue = getInputIssue();
        file.update(selectedIssue, newIssue);
        updateCustomerIssueTable(loadIssues());

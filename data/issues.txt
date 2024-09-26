@@ -1,3 +1,3 @@
-10,Lee,Broken Lights,It appears that one of the lights in the meeting room is broken.,OPEN,Unconfirmed,Lee,Qayyum,IN_PROGRESS
+10,Lee,Broken Lights,It appears that one of the lights in the meeting room is broken.,OPEN,Unconfirmed,Lee,Qayyum,CANCELLED
 11,Lin,Clogged Bathroom,Sorry but it looks like the toilet in the hall bathroom has been clogged. I hope it get fixed immediately!,OPEN,Unconfirmed,Gin,Qayyum,NONE
 12,Loo,Vandalisme,There is a lot of graffiti at the corridor of the ball room.,OPEN,Unconfirmed,Long,Qayyum,NONE
