@@ -23,35 +23,36 @@ public class ManagerMaintenance extends javax.swing.JFrame {
         updateCustomerIssueTable(loadIssues());
         cellIssueSelection = table_CustomerIssue.getSelectionModel();
         cellIssueSelection.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        cellIssueSelection.addListSelectionListener(new ListSelectionListener(){
-            public void valueChanged(ListSelectionEvent e){
+        cellIssueSelection.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
                 selectedIssue = getSelectedIssue();
                 if (selectedIssue != null) {
-                label_IssueId.setText("Issue ID:" + " " + selectedIssue.getIssueId());
-                text_CustomerName.setText(selectedIssue.getCustomerName());
-                text_Subject.setText(selectedIssue.getSubject());
-                textarea_Body.setText(selectedIssue.getBody());
-                combo_Confirmation.setSelectedItem(selectedIssue.getConfirmation());
-                text_ReporterName.setText(selectedIssue.getReporterName());
-                text_AssigneeName.setText(selectedIssue.getAssigneeName());
-                
-                switch (selectedIssue.getStatus().toString()) {    
-                    case "IN_PROGRESS":
-                        combo_Status.setSelectedIndex(0);
-                        break;
-                    case "DONE":
-                        combo_Status.setSelectedIndex(1);
-                        break;
-                    case "CANCELLED":
-                        combo_Status.setSelectedIndex(2);
-                        break;
-                    case "COMPLETED":
-                        combo_Status.setSelectedIndex(3);
-                        break;
-                    case "NONE":
-                        combo_Status.setSelectedIndex(4);
+                    label_IssueId.setText("Issue ID:" + " " + 
+                        selectedIssue.getIssueId());
+                    text_CustomerName.setText(selectedIssue.getCustomerName());
+                    text_Subject.setText(selectedIssue.getSubject());
+                    textarea_Body.setText(selectedIssue.getBody());
+                    combo_Confirmation.setSelectedItem(selectedIssue.getConfirmation());
+                    text_ReporterName.setText(selectedIssue.getReporterName());
+                    text_AssigneeName.setText(selectedIssue.getAssigneeName());
+
+                    switch (selectedIssue.getStatus().toString()) {    
+                        case "IN_PROGRESS":
+                            combo_Status.setSelectedIndex(0);
+                            break;
+                        case "DONE":
+                            combo_Status.setSelectedIndex(1);
+                            break;
+                        case "CANCELLED":
+                            combo_Status.setSelectedIndex(2);
+                            break;
+                        case "COMPLETED":
+                            combo_Status.setSelectedIndex(3);
+                            break;
+                        case "NONE":
+                            combo_Status.setSelectedIndex(4);
+                    }
                 }
-            }
             }
         });
     }
@@ -80,7 +81,8 @@ public class ManagerMaintenance extends javax.swing.JFrame {
             Issue i = new Issue(
                 issueId, customerName, subject, body, issueState, confirmation,
                 reporterName, assigneeName, issueMaintenanceStatus
-                );
+            );
+            
             return i;
         } else {
             return null;
@@ -166,7 +168,7 @@ public class ManagerMaintenance extends javax.swing.JFrame {
         }
 
         return new Issue(issueId, customerName, subject, body, state,
-                confirmation, reporterName, assigneeName, issueMaintenanceStatus
+            confirmation, reporterName, assigneeName, issueMaintenanceStatus
         );
     }
     
@@ -200,7 +202,7 @@ public class ManagerMaintenance extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
         } else {
-            warning("Please close the program and try again.", "Notify Customer Error");
+            warning("Row is not selected.", "Notify Customer Error");
         }
         
     }
@@ -209,15 +211,15 @@ public class ManagerMaintenance extends javax.swing.JFrame {
         
         Scheduler oldScheduler = null;
         ArrayList<User> users = file.read(FileType.USERS);
-        for(User u : users){
-            if(u instanceof Scheduler s){
-                if(s.getUsername().equals(schedulerAssignee)){
+        for(User u : users) {
+            if(u instanceof Scheduler s) {
+                if(s.getUsername().equals(schedulerAssignee)) {
                     oldScheduler = s;
                     break;
                 }
             }
         }
-        if(oldScheduler != null){
+        if (oldScheduler != null) {
             Scheduler newScheduler = oldScheduler;
             newScheduler.setIsAssignedHallMaintenance(value);
             file.update(oldScheduler, newScheduler);
@@ -263,7 +265,7 @@ public class ManagerMaintenance extends javax.swing.JFrame {
         String schedulerAssignee = (String)model.getValueAt(row, 7);
         
         if (row >= 0) {
-            String message = "You have removed assignedScheduler " + schedulerAssignee + 
+            String message = "You have removed Scheduler " + schedulerAssignee + 
                 " to fix Issue " + issueId +  ".\n";
             
             updateOldSchedulerData(schedulerAssignee, false); // Refers to setting isAssignedHallMaintenance to true.
@@ -602,7 +604,7 @@ public class ManagerMaintenance extends javax.swing.JFrame {
 
     private void button_UpdateStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_UpdateStatusActionPerformed
        if(selectedIssue == null){
-           warning("Please select an issue to update", "No Issue Selected");
+           warning("Please select an issue to update.", "No Issue Selected");
            return;
        }
        
