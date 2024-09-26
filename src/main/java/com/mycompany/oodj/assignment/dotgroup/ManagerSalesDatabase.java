@@ -22,7 +22,7 @@ public class ManagerSalesDatabase extends javax.swing.JFrame {
         updateSalesTable(loadSales());
     }
     
-    private ArrayList<ManagerSales> loadSales() {
+    private ArrayList<Sale> loadSales() {
         return file.read(FileType.SALES);
     }
     
@@ -32,21 +32,21 @@ public class ManagerSalesDatabase extends javax.swing.JFrame {
         model.setRowCount(0);
     }
     
-    private void updateSalesTable(ArrayList<ManagerSales> sales) {
+    private void updateSalesTable(ArrayList<Sale> sales) {
         DefaultTableModel model = (DefaultTableModel)table_SalesDatabase.getModel();
         removeAllRowsFromTable();
         
-        for (ManagerSales sale : sales) {
+        for (Sale sale : sales) {
             model.addRow(
                 new Object[]{
-                    sale.getSalesId(),
+                    sale.getSaleId(),
                     sale.getCustomerId(),
                     sale.getCustomerName(),
                     sale.getDate(),
                     sale.getTime(),
                     sale.getHallType(),
                     sale.getDescription(),
-                    sale.getTotalSales()
+                    sale.getTotalSale()
                 }
             );
         }
@@ -70,7 +70,7 @@ public class ManagerSalesDatabase extends javax.swing.JFrame {
         return null;        
     }
     
-    public ManagerSales getAllDataInSpecifiedRow(int row) {
+    public Sale getAllDataInSpecifiedRow(int row) {
         DefaultTableModel model = (DefaultTableModel)table_SalesDatabase.getModel();
 
         String salesId      = (String)model.getValueAt(row, 0);
@@ -84,16 +84,16 @@ public class ManagerSalesDatabase extends javax.swing.JFrame {
                 
         Double totalSales = (Double)model.getValueAt(row, 7);
 
-        return new ManagerSales(
+        return new Sale(
             salesId, customerId, customerName,
             date, time, hallType, description, totalSales
         );
     }
     
-    private ArrayList<ManagerSales> getSalesFiltered(LocalDate startDate, LocalDate endDate, LocalDate selectedDate) {
+    private ArrayList<Sale> getSalesFiltered(LocalDate startDate, LocalDate endDate, LocalDate selectedDate) {
         DefaultTableModel model = (DefaultTableModel)table_SalesDatabase.getModel();
 
-        ArrayList<ManagerSales> salesFiltered = new ArrayList();
+        ArrayList<Sale> salesFiltered = new ArrayList();
        
         for (int row = 0; row != model.getRowCount(); row++) {
             String targetDate = model.getValueAt(row, DATE_COLUMN).toString();
@@ -126,7 +126,7 @@ public class ManagerSalesDatabase extends javax.swing.JFrame {
         LocalDate startDate = convertToLocalDate(calendar_SalesMadeFilterStart.getDate());
         LocalDate endDate = convertToLocalDate(calendar_SalesMadeFilterEnd.getDate());
 
-        ArrayList<ManagerSales> salesFiltered = getSalesFiltered(startDate, endDate, selectedDate);
+        ArrayList<Sale> salesFiltered = getSalesFiltered(startDate, endDate, selectedDate);
         updateSalesTable(salesFiltered);
     }
         

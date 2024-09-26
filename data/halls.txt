@@ -1,4 +1,4 @@
 Theater,150.0,300
-Auditorium,50.0,200
-Meeting Room,30.0,20
-Ball Room,80.0,100
+Auditorium,300.0,1000
+Banquet Hall,100.0,300
+Meeting Room,50.0,30

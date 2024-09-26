@@ -3,43 +3,54 @@ package com.mycompany.oodj.assignment.dotgroup;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
-public class ManagerSales {
+public class Sale {
+    
+    private String saleId;
+    private String customerId;
+    private String customerName;
+    private LocalDateTime dateTime;
+    private LocalDate date;
+    private LocalTime time;
+    private String description;
+    private String hallType;
+    private double totalSale;
 
-    public ManagerSales(String salesId, String customerId, String customerName, LocalDate date, LocalTime time, 
+    public Sale(String salesId, String customerId, String customerName, LocalDate date, LocalTime time, 
             String hallType, String description, double totalSales) {
-        this.salesId = salesId;
+        this.saleId = salesId;
         this.customerId = customerId;
         this.customerName = customerName;
         this.date = date;
         this.time = time;
         this.hallType = hallType;
         this.description = description;
-        this.totalSales = totalSales;
+        this.totalSale = totalSales;
     }
     
     @Override
     public String toString() {
-        return salesId + "," + customerId + "," + customerName + "," +
+        return saleId + "," + customerId + "," + customerName + "," +
             date + "," + time + "," + hallType + "," + 
-            description + "," + totalSales;
+            description + "," + totalSale;
     }
     
-    public static ManagerSales parse(String line){
+    public static Sale parse(String line){
         String[] col = line.split(",");
 
         String salesId = col[0];
         String customerId = col[1];
         String customerName = col[2];
         
-        LocalDate date = LocalDateTime.parse(col[3]).toLocalDate();
-        LocalTime time = LocalDateTime.parse(col[3]).toLocalTime();
+        LocalDate date = LocalDate.parse(col[3], DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalTime time = LocalTime.parse(col[4], DateTimeFormatter.ISO_LOCAL_TIME);
         
-        String hallType = col[4];
-        String description = col[5];
-        double totalSales = Double.parseDouble(col[6]);
+        String hallType = col[5];
+        String description = col[6];
+        double totalSales = Double.parseDouble(col[7]);
         
-        ManagerSales sales = new ManagerSales(
+        Sale sales = new Sale(
             salesId, customerId, customerName, 
             date, time, hallType, description, totalSales
         );
@@ -47,12 +58,12 @@ public class ManagerSales {
         return sales;
     }
 
-    public String getSalesId() {
-        return salesId;
+    public String getSaleId() {
+        return saleId;
     }
 
-    public void setSalesId(String salesId) {
-        this.salesId = salesId;
+    public void setSaleId(String saleId) {
+        this.saleId = saleId;
     }
 
     public String getCustomerId() {
@@ -111,21 +122,11 @@ public class ManagerSales {
         this.hallType = hallType;
     }
 
-    public double getTotalSales() {
-        return totalSales;
+    public double getTotalSale() {
+        return totalSale;
     }
 
-    public void setTotalSales(double totalSales) {
-        this.totalSales = totalSales;
+    public void setTotalSale(double totalSale) {
+        this.totalSale = totalSale;
     }
-    
-    private String salesId;
-    private String customerId;
-    private String customerName;
-    private LocalDateTime dateTime;
-    private LocalDate date;
-    private LocalTime time;
-    private String description;
-    private String hallType;
-    private double totalSales;
 }

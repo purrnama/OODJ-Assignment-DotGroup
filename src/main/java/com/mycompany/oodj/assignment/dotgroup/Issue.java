@@ -21,7 +21,7 @@ public class Issue {
         this.setCustomerName(customerName);
         this.setSubject(subject);
         this.setBody(body);
-        this.setState(state); // ! Here not sure why not working: IssueState::state
+        this.setState(state);
         this.setConfirmation(confirmation); 
         this.setReporterName(reporterName); 
         this.setAssigneeName(assigneeName); 

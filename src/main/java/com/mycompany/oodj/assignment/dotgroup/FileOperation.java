@@ -191,6 +191,10 @@ public class FileOperation {
         write(issuesFile, i.toString());
     }
     
+    public void create(Sale s){
+        write(salesFile, s.toString());
+    }
+    
     public ArrayList read(FileType type){
         if(type == FileType.HALLS){
             ArrayList<String> data = readFile(hallsFile);
@@ -252,9 +256,9 @@ public class FileOperation {
         
         if (type == FileType.SALES) {
             ArrayList<String> data = readFile(salesFile);
-            ArrayList<ManagerSales> salesData = new ArrayList();
+            ArrayList<Sale> salesData = new ArrayList();
             for (String line : data) {
-                ManagerSales i = ManagerSales.parse(line);
+                Sale i = Sale.parse(line);
                 salesData.add(i);
             }
             return salesData;
