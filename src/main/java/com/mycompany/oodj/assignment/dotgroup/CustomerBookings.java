@@ -172,14 +172,14 @@ public class CustomerBookings extends javax.swing.JFrame {
 
         jLabel3.setText("Select Date:");
 
-        jLabel10.setText("Payment");
+        jLabel10.setText("View Receipt");
 
         jLabel5.setText("Start Time:");
 
         jLabel2.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel2.setText("Create Booking");
 
-        btnCalculatePayment.setText("Calculate Payment");
+        btnCalculatePayment.setText("Preview Receipt");
         btnCalculatePayment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCalculatePaymentActionPerformed(evt);

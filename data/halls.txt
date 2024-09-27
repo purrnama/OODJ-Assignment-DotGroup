@@ -1,4 +1,3 @@
-Theater,150.0,300
 Auditorium,300.0,1000
 Banquet Hall,100.0,300
 Meeting Room,50.0,30

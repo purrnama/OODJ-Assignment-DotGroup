@@ -240,9 +240,10 @@ public class ManagerMaintenance extends javax.swing.JFrame {
         
         String issueId = (String)model.getValueAt(row, 0);
         String schedulerAssignee = (String)model.getValueAt(row, 7);
+        String schedulerAssigneeTextBox = text_AssigneeName.getText();
         
         if (row >= 0) {
-            String message = "You have assigned Scheduler " + schedulerAssignee + 
+            String message = "You have assigned Scheduler " + schedulerAssigneeTextBox + 
                 " to fix Issue " + issueId +  ".\n";
             
             updateOldSchedulerData(schedulerAssignee, true); // Refers to setting isAssignedHallMaintenance to true.

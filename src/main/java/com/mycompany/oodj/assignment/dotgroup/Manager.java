@@ -22,6 +22,7 @@ public class Manager extends User {
         return this.getUsername() + "," + this.getPassword() + "," + RoleType.MANAGER;
     }
     
+    //overriding openPanel method in abstract User class
     public JFrame openPanel(JFrame login){
         ManagerPanel panel = new ManagerPanel();
         panel.setVisible(true);
